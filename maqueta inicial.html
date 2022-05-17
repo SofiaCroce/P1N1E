@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obligatorio</title>
+</head>
+<body>
+    <!-- LOGIN -->
+    <!-- ------------------------------------------------------- -->
+    <Div id="login">
+
+        <label for="usuario">Usuario:</label>
+        <input type="text" id="usuario">
+        <br>
+        <br>
+        <label for="password">Contraseña:</label>
+        <input type="text" id="password">
+        <br>
+        <br>
+        <input type="button" id="btnLogin" value="Ingresar">
+<hr>
+    </Div>
+    <!-- REGISTRO -->
+    <!-- ------------------------------------------------------- -->
+    <Div id="registro">
+        <h3>Registrarse:</h3>
+
+        <label for="registroNombre">Ingrese su nombre:</label>
+        <input type="text" id="registroNombre">
+        <br>
+        <br>
+        <label for="registroUsuario">Ingrese nombre de usuario:</label>
+        <input type="text" id="registroUsuario">
+        <br>
+        <br>
+        <label for="registroPassword">Ingrese una contraseña:</label>
+        <input type="text" id="registroPassword">
+        <br>
+        <br>
+        <input type="button" id="btnRegistro" value="Finalizar registro">
+<hr>
+    </Div>
+
+    <!-- ADMINISTRAR LOCAL -->
+    <!-- ------------------------------------------------------- -->
+<div id="AdministrarLocal">
+    <label for="habilitarDisponibilidad">Habilitar disponibilidad:</label>
+    <br>
+    <br>
+    <select name="habilitarDisponibilidad" id="habilitarDisponibilidad">
+        <option selected value="Habilitado">Habilitado</option>
+        <option value="Deshabilitado">Deshabilitado</option>
+    </select>
+<hr>
+</div>
+
+ <!-- CAMBIAR ESTADO DE RESERVA -->
+    <!-- ------------------------------------------------------- -->
+
+<div id="adminReserva">
+    <label for="buscadorDeReservas">Buscar una Reserva:</label>
+    <input type="text" id="buscadorDeReservas" placeholder="Ingrese palabra clave...">
+    <input type="button" value="Buscar" id="btnBuscarReservas">
+    <br>
+    <br>
+    <h3>Lista de Reservas Pendientes:</h3>
+    <ul>
+        <li>Reserva Asiento 1 Fila 8
+        <div id="reservaPendiente01">
+            <label for="estadoReserva01">Estado de la Reserva:</label>
+            <select id="estadoReserva01">
+                <option selected value="pendiente">Pendiente</option>
+                <option value="finalizado">Finalizado</option>
+            </select>
+        </div>
+        </li>
+        <li>Reserva Asiento 2 Fila 8
+        <div id="reservaPendiente02">
+            <label for="estadoReserva02">Estado de la Reserva:</label>
+            <select id="estadoReserva02">
+                <option selected value="pendiente">Pendiente</option>
+                <option value="finalizado">Finalizado</option>
+            </select>
+        </div>
+        </li>
+    </ul>
+    <button id="btnGuardarCambiosReservas">Guardar Cambios</button>
+    <hr>
+</div>
+
+<!-- ESTADISTICAS -->
+  <!-- ------------------------------------------------------- -->
+
+  <div id="infoEstadistica">
+<!-- INFORMACION DE LOCAL -->
+<h3>Local</h3>
+        <div id="infoEstadisticaLocal">
+            <p id="pPorcentajeDeOcpacion">Ocupación 20%</p>
+
+            <p id="pPromedioDeCalificacion">Calificación del local : 4.9</p>
+
+            <h4>Listado de calificaciones por local.</h4>
+            <ul id="ulListadoDeCalificaciones">
+                <li>local 1: 4.3</li>
+                <li>local 2: 3.3</li>
+                <li>local 3: 4.0</li>
+                <li>local 4: 4.5</li>
+            </ul>
+        <h4>Reservas.</h4>
+            <p id="pTotalDeReservas">Total de reservas: 52</p>
+            <p id="pTotalDeReservasPendientes">Total de pendientes: 22</p>
+            <p id="pTotalDeReservasFinalizadas">Total de finalizadas: 30</p>
+            
+            
+<!-- INFORMACION PERSONA -->
+<h3>Persona</h3>
+            <div id="infoEstadisticaPersona">
+             
+                <h4>Listado de locales con reservas completadas.</h4>
+                <ul id="ulListadoDeReservasCompletadas">
+                    <li>local 1  \ 15 reservas hechas \ Reservas taltales del local : 50 \ 7.5  % de resevas hechas por el usuario</li>
+                    <li>local 2: \ 2  reservas hechas \ Reservas taltales del local : 33 \ 6.6  % de resevas hechas por el usuario</li>
+                    <li>local 4: \ 9  reservas hechas \ Reservas taltales del local : 42 \ 37.8 % de resevas hechas por el usuario</li>
+                </ul>
+            <h4>Local con mas reservas hechas.</h4>
+
+            <ul id="ulLocalConMasReservas">
+                <li>local 1  \ 15 reservas hechas</li>
+            </ul>
+               
+
+
+        </div>
+
+
+  </div>
+</body>
+</html>

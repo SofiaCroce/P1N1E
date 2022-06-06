@@ -45,10 +45,11 @@ class TipoEstadoDeReserva {
 // clase  UsuarioLocal
 // -------------------------------------------------
 class UsuarioLocal {
-  constructor(pNombre, pPassword, pDireccion, pCupoMaximo, pFoto, pTipoLocal) {
+  constructor(pNombreUsuario, pPassword, pNombre, pDireccion, pCupoMaximo, pFoto, pTipoLocal) {
     this.id = proximoUsuarioID; //autonumber
-    this.nombreUsuario = pNombre; // Case insensitive
+    this.nombreUsuario = pNombreUsuario; // Case insensitive
     this.password = pPassword; // Case sensitive
+    this.nombre = pNombre; // nombre del local
     this.direccion = pDireccion;
     this.cupoMaximo = pCupoMaximo;
     this.foto = pFoto; // Nombre de la imagen y extension ej: img1.jpg
@@ -70,10 +71,11 @@ class UsuarioLocal {
 // clase  UsuarioPersona
 // -------------------------------------------------
 class UsuarioPersona {
-  constructor(pNombre, pPassword) {
+  constructor(pNombreUsuario, pPassword, pNombre) {
     this.id = proximoUsuarioID; //autonumber
-    this.nombreUsuario = pNombre; //Debe ser Unico en toda la app
+    this.nombreUsuario = pNombreUsuario; //Debe ser Unico en toda la app
     this.password = pPassword; // La contraseña deberá tener un mínimo de 6 caracteres, contando con al menos una mayúscula, una minúscula y un número
+    this.nombre = pNombre; // nombre de la persona
     this.tipoUsuarioId = 2;
 
     proximoUsuarioID++;
@@ -94,4 +96,13 @@ class Reserva {
 
     proximaReservaID++;
   }
+
+  finalizarReserva(){
+    this.estado = 2;
+  }
+
+  cancelarReserva(){
+    this.estado = 3;
+  }
+
 }

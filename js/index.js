@@ -20,9 +20,10 @@ let reservas = [];
 inicializar();
 
 function inicializar() {
-    // mostrarLogin();
+    mostrarHome();
+    
     // actualizarMenuPorTipoDeUsuario();
-    // cargarClickEnBotones();
+    cargarClickEnBotones();
     precargarDatos();
 }
 
@@ -128,8 +129,77 @@ function precargarReservas () {
     reservas[6].finalizarReserva();
 
     // reserva canceladas
-    reservas.push(new Reserva(8,2,5)); // id 8
+    reservas.push(new Reserva(8,2,7)); // id 8
     reservas[7].cancelarReserva();
 
+
+}
+// -------------------------------------------------
+//             Manejo De botones
+// -------------------------------------------------
+
+function cargarClickEnBotones() {
+    document.querySelector("#btnMenuLogin").addEventListener("click", btnMenuLoginHandler);
+    document.querySelector("#btnMenuRegistro").addEventListener("click", btnMenuRegistroHandler);
+    document.querySelector("#btnMenuHome").addEventListener("click", btnMenuHomeHandler);
+}
+
+// -------------------------------------------------
+//             Eventos De botones
+// -------------------------------------------------
+
+function btnMenuLoginHandler(){
+    mostrarLogin();
+}
+
+function btnMenuHomeHandler(){
+    mostrarHome();
+}
+
+function btnMenuRegistroHandler(){
+    mostrarRegistro();
+}
+
+
+
+// -------------------------------------------------
+//             Manejo De Pantallas
+// -------------------------------------------------
+function mostrarLogin() {
+   
+    ocultarPantallas();
+    document.querySelector("#divLogin").style.display = "block";
+}
+
+function mostrarRegistro(){
+    
+    ocultarPantallas();
+    document.querySelector("#divRegistro").style.display = "block";
+}
+
+function mostrarHome(){
+    
+    ocultarPantallas();
+    document.querySelector("#divHome").style.display = "block";
+}
+
+
+
+function ocultarPantallas() {
+    vaciarCampos();
+    document.querySelector("#divLogin").style.display = "none";
+    document.querySelector("#divHome").style.display = "none";
+    document.querySelector("#divRegistro").style.display = "none";
+}
+
+// -------------------------------------------------
+//             Manejo De Campos
+// -------------------------------------------------
+
+function vaciarCampos() {
+    document.querySelector("#txtLoginUsuario").value = "";
+    document.querySelector("#txtLoginPassword").value = "";
+    document.querySelector("#txtRegistroUsuario").value = "";
+    document.querySelector("#txtRegistroPassword").value = "";
 
 }

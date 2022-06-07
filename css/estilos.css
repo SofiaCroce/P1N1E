@@ -115,7 +115,7 @@ p.ver-mas {
   padding: 0 24px 10px 0;
 }
 
-#navPrincipal a {
+#navPrincipal a, #navSecundarioLocal a,  #navSecundarioPersona a{
   color: #FFFAFF;
   cursor: pointer;
   color: #fff;
@@ -129,14 +129,22 @@ p.ver-mas {
   font-size: 14px;
 }
 
-#navPrincipal {
+#navPrincipal, #navSecundarioLocal, #navSecundarioPersona {
   float: right;
   margin-top: 5px;
   margin-right: 10px;
-  max-width: 400px;
+  max-width: 600px;
 }
 
-#navPrincipal li {
+#navSecundarioLocal, #navSecundarioPersona {
+  padding: 0;
+  margin: 0;
+  border-top: 2px solid #fff;
+  float: left;
+  background-color: #303036;
+}
+
+#navPrincipal li, #navSecundarioLocal li , #navSecundarioPersona li{
   font-family: 'Roboto Flex', sans-serif;
   list-style-type: none;
   padding: 10px;

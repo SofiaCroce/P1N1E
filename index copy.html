@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <link rel="icon" href="data:,">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio integrador</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+  <div id="contenedor">
+    <div id="cabezal" class="clearfix">
+      <img id="logo" src="https://develotion.com/p1/2022_03/icon.png" alt="logo">
+
+      <ul id="navPrincipal">
+        
+        <li id="btnMenuLogin">
+          <a>Ingresar</a>
+        </li>
+        <li id="btnMenuRegistro">
+          <a>Registro</a>
+        </li>
+        <li id="btnMenuHome">
+          <a>Home</a>
+        </li>
+        <!-- <li id="btnMenuListaUsuarios">
+          <a>Gestión de usuarios</a>
+        </li>
+        <li id="btnMenuAltaPublicacion">
+          <a>Publicar</a>
+        </li>
+        <li id="btnMenuCerrarSesion">
+          <a>Salir</a>
+        </li> -->
+      </ul>
+      <!--<div id="aux">
+        <a>Menú alt. 1</a> | <a>Menú alt. 2</a>
+      </div>-->
+      <!-- FIN AUX -->
+    </div><!-- FIN CABEZAL -->
+
+    <div id="contenido">
+
+      <div id="divLogin">
+        <h3>Ingreso</h3>
+        <label for="txtLoginUsuario">Usuario:</label>
+        <input id="txtLoginUsuario" type="text">
+        <br><br>
+        <label for="txtLoginPassword">Password:</label>
+        <input id="txtLoginPassword" type="password">
+        <br><br>
+        <input type="button" value="Ingresar" id="btnLoginIngresar">
+        <br><br>
+        <div id="divLoginMensajes"></div>
+      </div>
+
+      <div id="divRegistro">
+        <h3>Registro</h3>
+        <label for="txtRegistroUsuario">Usuario:</label>
+        <input id="txtRegistroUsuario" type="text">
+        <br><br>
+        <label for="txtRegistroPassword">Password:</label>
+        <input id="txtRegistroPassword" type="password">
+        <br><br>
+        <input type="button" value="Registrarse" id="btnRegistroRegistrarse">
+        <br><br>
+        <div id="divRegistroMensajes"></div>
+      </div>
+
+      <div id="divHome">
+        <h3>Home</h3>
+        <h1>Bienvenido</h1>
+      </div>
+
+      <!-- <div id="divAltaPublicacion">
+        <h3>Publicar</h3>
+        <label for="fileAltaPublicacionFoto">Imagen:</label>
+        <input id="fileAltaPublicacionFoto" type="file">
+        <br><br>
+        <label for="txtAltaPublicacionTitulo">Título:</label>
+        <input id="txtAltaPublicacionTitulo" type="text">
+        <br><br>
+        <label for="txtAltaPublicacionDescripcion">Descripción:</label>
+        <textarea id="txtAltaPublicacionDescripcion"></textarea>
+        <br><br>
+        <select id="comboAltaPublicacionCategoria"></select>
+        <br><br>
+        <input type="button" value="Guardar" id="btnAltaPublicacionGuardar">
+        <br><br>
+        <div id="divAltaCategoriaMensajes"></div>
+      </div> -->
+
+      <!-- <div id="divGestionDeUsuarios">
+        <h3>Gestión de usuarios</h3>
+        <div>
+          <label for="comboGestionDeUsuariosTipoUsuario">Filtro</label>
+          <select id="comboGestionDeUsuariosTipoUsuario"></select>
+          <input type="button" value="Filtrar" id="btnGestionDeUsuariosFiltrar">
+        </div>
+        <br>
+        <table>
+          <thead>
+            <tr>
+              <th>Usuario</th>
+              <th>Tipo</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="bodyTablaGestionUsuarios">
+          </tbody>
+        </table>
+      </div> -->
+      <!--<hr>
+      <hr>
+      <div class="interior">
+        <div>
+          <h2>Contenido 1</h2>
+          <img src="img/foto1.jpg">
+          <p>Donec dapibus arcu a diam commodo, vel vehicula orci volutpat. Vestibulum convallis tempor mattis. Donec
+            molestie semper leo vel luctus. Curabitur quis nisi maximus, luctus lorem quis, dignissim augue.</p>
+          <input type="button" value="Ejecutar acción">
+        </div>
+        <hr>
+        <div>
+          <h2>Contenido 2</h2>
+          <img src="img/foto2.jpg">
+          <p>Donec dapibus arcu a diam commodo, vel vehicula orci volutpat. Vestibulum convallis tempor mattis. Donec
+            molestie semper leo vel luctus. Curabitur quis nisi maximus, luctus lorem quis, dignissim augue.</p>
+          <input type="button" value="Ejecutar acción">
+        </div>
+      </div>-->
+      <!--FIN ELEMENTOS-->
+    </div><!-- FIN CONTENIDO -->
+
+    <div id="pie">
+      <a href="https://www.ort.edu.uy">Ejemplo realizado en clase</a>
+    </div><!-- FIN PIE -->
+  </div><!-- FIN CONTENEDOR -->
+
+  <script type="text/javascript" src="js/clases.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+</body>
+
+</html>

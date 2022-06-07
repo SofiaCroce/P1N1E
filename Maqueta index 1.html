@@ -24,7 +24,6 @@
     </Div>
     <!-- REGISTRO -->
     <!-- ------------------------------------------------------- -->
-    <Div><h1>prueba</h1></Div>
     <Div id="registro">
         <h3>Registrarse:</h3>
 
@@ -46,8 +45,7 @@
 
     <!-- ADMINISTRAR LOCAL -->
     <!-- ------------------------------------------------------- -->
-<div id="AdministrarLocal">
-    <h2>Administrar Local</h2>
+<div id="administrarLocal">
     <label for="habilitarDisponibilidad">Habilitar disponibilidad:</label>
     <br>
     <br>
@@ -55,57 +53,15 @@
         <option selected value="Habilitado">Habilitado</option>
         <option value="Deshabilitado">Deshabilitado</option>
     </select>
-    <br>
-    <br>
-    <label for="cupoMaximo">Cupo máximo:</label>
-    <input type="number" id="cupoMaximo">
-<br>
-<br>
 <hr>
 </div>
-
- <!-- CAMBIAR ESTADO DE RESERVA -->
-    <!-- ------------------------------------------------------- -->
-
-<div id="adminReserva">
-    <label for="buscadorDeReservas">Buscar una Reserva:</label>
-    <input type="text" id="buscadorDeReservas" placeholder="Ingrese palabra clave...">
-    <input type="button" value="Buscar" id="btnBuscarReservas">
-    <br>
-    <br>
-    <h3>Lista de Reservas Pendientes:</h3>
-    <ul>
-        <li>Reserva Asiento 1 Fila 8
-        <div id="reservaPendiente01">
-            <label for="estadoReserva01">Estado de la Reserva:</label>
-            <select id="estadoReserva01">
-                <option selected value="pendiente">Pendiente</option>
-                <option value="finalizado">Finalizado</option>
-            </select>
-        </div>
-        </li>
-        <li>Reserva Asiento 2 Fila 8
-        <div id="reservaPendiente02">
-            <label for="estadoReserva02">Estado de la Reserva:</label>
-            <select id="estadoReserva02">
-                <option selected value="pendiente">Pendiente</option>
-                <option value="finalizado">Finalizado</option>
-            </select>
-        </div>
-        </li>
-    </ul>
-    <button id="btnGuardarCambiosReservas">Guardar Cambios</button>
-    <hr>
-</div>
-
 <!-- ESTADISTICAS -->
   <!-- ------------------------------------------------------- -->
 
   <div id="infoEstadistica">
 <!-- INFORMACION DE LOCAL -->
-
+<h3>Local</h3>
         <div id="infoEstadisticaLocal">
-            <h3>Local</h3>
             <p id="pPorcentajeDeOcpacion">Ocupación 20%</p>
 
             <p id="pPromedioDeCalificacion">Calificación del local : 4.9</p>
@@ -121,12 +77,12 @@
             <p id="pTotalDeReservas">Total de reservas: 52</p>
             <p id="pTotalDeReservasPendientes">Total de pendientes: 22</p>
             <p id="pTotalDeReservasFinalizadas">Total de finalizadas: 30</p>
-        </div> 
             
+       <hr>     
 <!-- INFORMACION PERSONA -->
-
+<h3>Persona</h3>
             <div id="infoEstadisticaPersona">
-                <h3>Persona</h3>
+             
                 <h4>Listado de locales con reservas completadas.</h4>
                 <ul id="ulListadoDeReservasCompletadas">
                     <li>local 1  \ 15 reservas hechas \ Reservas taltales del local : 50 \ 7.5  % de resevas hechas por el usuario</li>
@@ -143,7 +99,87 @@
 
         </div>
 
+  </div>
+
+<hr>
+      <!-- REALIZAR RESERVA -->
+    <!-- ------------------------------------------------------- -->
+<div id="realizarReserva">
+    <label for="localAReservar">Local:</label>
+    <select name="localAReservar" id="localAReservar">
+        <option selected value="1">Local 1</option>
+        <option value="2">Local 2</option>
+    </select>
+    <br>
+    <br>
+    <label for="cantidadAReservar">Cupos a reservar:</label>
+    <input type="number" id="cantidadAReservar">
+<br>
+<br>
+<input type="button" id="btnRealizarReserva" value="Reservar">
+<hr>
+</div>
+<!--  -->
+  <!-- ------------------------------------------------------- -->
+
+      <!-- Modificar RESERVA -->
+    <!-- ------------------------------------------------------- -->
+<div id="modificarReserva">
+    <p id="pReservaACancelar">Reserva en local 1 de 5 personas.</p>
+<br>
+
+<input type="button" id="btnCancelarReserva" value="Cancelar Reserva">
+<input type="button" id="btnVolverAConsulta" value="Volver">
+<br>
+<br>
+<fieldset>
+    <legend>Puntua tu reserva</legend>
+    <label>
+        <input type="radio" name="numero" value="1"> 1
+    </label>
+    <label>
+        <input type="radio" name="numero" value="2"> 2
+    </label>
+    <label>
+        <input type="radio" name="numero" value="3"> 3
+    </label>
+    <label>
+        <input type="radio" name="numero" value="4"> 4
+    </label>
+    <label>
+        <input type="radio" name="numero" value="5"> 5
+    </label>
+<br>
+<br>
+    <input type="button" id="btnPuntuar" value="Puntuar">
+</fieldset>
+
+<hr>
+</div>
+<!-- Reservas pendientes -->
+            <div id="reservasPendientesPersona">
+             
+                <h4>Reserevas pendientes.</h4>
+                <ul id="ulListadoDeReservasPendientes">
+                    <img width="100px" src="https://www.anfix.com/hubfs/Imported_Blog_Media/alquiler-3.png" alt="">
+                    <li>local 1  \ 10 cupos. <a href="#">Ver</a></li>
+                    <img width="100px" src="https://www.anfix.com/hubfs/Imported_Blog_Media/alquiler-3.png" alt="">
+                    <li>local 2: \ 24 cupos. <a href="#">Ver</a></li>
+                    <img width="100px" src="https://www.anfix.com/hubfs/Imported_Blog_Media/alquiler-3.png" alt="">
+                    <li>local 4: \ 7 Cupos. <a href="#">Ver</a></li>
+                </ul>
+               
+
+
+        </div>
 
   </div>
+
+<hr>
+      <!-- REALIZAR RESERVA -->
+    <!-- ------------------------------------------------------- -->
+<!--  -->
+  <!-- ------------------------------------------------------- -->
+  <!-- https://www.anfix.com/hubfs/Imported_Blog_Media/alquiler-3.png -->
 </body>
 </html>

@@ -4,6 +4,14 @@
 // -------------------------------------------------
 //              VARIABLES GLOBALES Y DATOS
 // -------------------------------------------------
+
+//Harcodeo el usuario que logeo para mostrar la pantalla, hay que cambiarlo luego
+// 2 usuario persoa
+// 1 local 
+let tipoDeUsuarioLogueado = 2 ;
+let usuarioEstaLogueado= false;
+
+
 let tiposDeUsuario = [];
 let tiposDeLocal = [];
 let tipoEstadoDeReserva = [];
@@ -39,7 +47,7 @@ function precargarDatos() {
 
 
 // -------------------------------------------------
-//              Carca de opciones
+//              Carga de opciones
 // -------------------------------------------------
 
 function precargaDeOpciones(){
@@ -139,13 +147,44 @@ function precargarReservas () {
 // -------------------------------------------------
 
 function cargarClickEnBotones() {
+// Menu
     document.querySelector("#btnMenuLogin").addEventListener("click", btnMenuLoginHandler);
     document.querySelector("#btnMenuRegistro").addEventListener("click", btnMenuRegistroHandler);
     document.querySelector("#btnMenuHome").addEventListener("click", btnMenuHomeHandler);
+    
+    document.querySelector("#btnMenuCerrarSesion").addEventListener("click", btnMenuCerrarSesionHandler);
+
+//REGISTRO 
+    document.querySelector("#btnRegistrarse").addEventListener("click", btnRegistrarseHandler);
+
+// LOGIN
+    document.querySelector("#btnLoginIngresar").addEventListener("click", btnLoginIngresarHandler);
+// Persona
+// --------------------
+// Reservar
+    document.querySelector("#btnReservarPersonaMenu").addEventListener("click", btnReservarPersonaMenuHandler);
+// Estadistica
+    document.querySelector("#btnEstadisticasPersonaMenu").addEventListener("click", btnEstadisticasPersonaMenuHandler);
+// reservas pendientes
+    document.querySelector("#btnReservasPendientesPersonaMenu").addEventListener("click", btnReservasPendientesPersonaMenuHandler);
+// reservas finalizadas
+    document.querySelector("#btnReservasFinalizadasPersonaMenu").addEventListener("click", btnReservasFinalizadasPersonaMenuHandler);
+
+    // Local
+// --------------------
+
+// Estadistica
+    document.querySelector("#btnEstadisticasLocalMenu").addEventListener("click", btnEstadisticasLocalMenuHandler);
+// Administrar Reservas
+    document.querySelector("#btnAdministrarReservasLocalMenu").addEventListener("click", btnAdministrarReservasLocalMenuHandler);
+//Administrar local
+    document.querySelector("#btnAdministrarLocalMenu").addEventListener("click", btnAdministrarLocalMenuHandler);
+
+
 }
 
 // -------------------------------------------------
-//             Eventos De botones
+//             Eventos De botones Menu
 // -------------------------------------------------
 
 function btnMenuLoginHandler(){
@@ -160,7 +199,12 @@ function btnMenuRegistroHandler(){
     mostrarRegistro();
 }
 
-
+function btnMenuCerrarSesionHandler(){
+    usuarioEstaLogueado = 0
+    
+    mostrarHome();
+    
+}
 
 // -------------------------------------------------
 //             Manejo De Pantallas
@@ -183,13 +227,123 @@ function mostrarHome(){
     document.querySelector("#divHome").style.display = "block";
 }
 
+// LOGIN
+
+function mostrarPantallaLocalLogueado(){
+    ocultarPantallas();
+    // mostrar opciones
+    document.querySelector("#cabezalLocal").style.display = "block";
+      // mostrar contenido
+    document.querySelector("#adminReserva").style.display = "block";
+    // mostrar botones
+    document.querySelector("#btnMenuCerrarSesion").style.display = "block";
+}
+
+function mostrarPantallaPersonaLogueada(){
+    ocultarPantallas();
+    // mostrar opciones
+    document.querySelector("#cabezalPersona").style.display = "block";
+    // mostrar contenido
+    document.querySelector("#reservasPendientes").style.display = "block";
+    // mostrar botones
+    document.querySelector("#btnMenuCerrarSesion").style.display = "block";
+    
+}
+
+// Menu persona
+// -------------------------------
+    // Estadistica
+function btnEstadisticasPersonaMenuHandler(){
+    ocultarPantallas();
+    document.querySelector("#cabezalPersona").style.display = "block";
+    document.querySelector("#infoEstadistica").style.display = "block";
+    document.querySelector("#infoEstadisticaPersona").style.display = "block";
+}
+    // Reservar
+function btnReservarPersonaMenuHandler(){
+    ocultarPantallas();
+    document.querySelector("#cabezalPersona").style.display = "block";
+    document.querySelector("#realizarReserva").style.display = "block";
+
+}
+// reservas pendientes
+function btnReservasPendientesPersonaMenuHandler(){
+    ocultarPantallas();
+    document.querySelector("#reservasPendientes").style.display = "block";
+    document.querySelector("#cabezalPersona").style.display = "block";
+}
+
+// reservas pendientes
+function btnReservasFinalizadasPersonaMenuHandler(){
+    ocultarPantallas();
+    document.querySelector("#cabezalPersona").style.display = "block";
+    document.querySelector("#reservasFinalizadas").style.display = "block";
+   
+}
 
 
+// Menu Local
+// -------------------------------
+
+function btnEstadisticasLocalMenuHandler(){
+    ocultarPantallas();
+    document.querySelector("#cabezalLocal").style.display = "block";
+    document.querySelector("#infoEstadistica").style.display = "block";
+    document.querySelector("#infoEstadisticaLocal").style.display = "block";
+}
+function btnAdministrarReservasLocalMenuHandler(){
+    ocultarPantallas();
+    document.querySelector("#cabezalLocal").style.display = "block";
+    document.querySelector("#adminReserva").style.display = "block";
+   
+}
+function btnAdministrarLocalMenuHandler(){
+    ocultarPantallas();
+    document.querySelector("#cabezalLocal").style.display = "block";
+    document.querySelector("#administrarLocal").style.display = "block";
+   
+}
+// ---------------------------------------------------------------------------
 function ocultarPantallas() {
     vaciarCampos();
+    // PERSONA
+    // Menu
+    document.querySelector("#cabezalPersona").style.display = "none";
+
+    // estadisticas
+    document.querySelector("#infoEstadisticaPersona").style.display = "none";
+    // reservar
+    document.querySelector("#realizarReserva").style.display = "none";
+     // reservas finalizadas
+     document.querySelector("#reservasFinalizadas").style.display = "none";
+    // reservas pendientes
+    document.querySelector("#reservasPendientes").style.display = "none";
+
+    //LOCAL
+    document.querySelector("#cabezalLocal").style.display = "none";
+    // estadisticas
+    document.querySelector("#infoEstadisticaLocal").style.display = "none";
+    // administrar local
+    document.querySelector("#administrarLocal").style.display = "none";
+
+
+    //
+    document.querySelector("#infoEstadistica").style.display = "none";
+    
+
+    document.querySelector("#adminReserva").style.display = "none";
     document.querySelector("#divLogin").style.display = "none";
     document.querySelector("#divHome").style.display = "none";
     document.querySelector("#divRegistro").style.display = "none";
+
+
+    // botones ocultos
+    if(usuarioEstaLogueado){
+        document.querySelector("#btnMenuCerrarSesion").style.display = "block";
+    }else{
+        document.querySelector("#btnMenuCerrarSesion").style.display = "none";
+    }
+    
 }
 
 // -------------------------------------------------
@@ -203,3 +357,85 @@ function vaciarCampos() {
     document.querySelector("#txtRegistroPassword").value = "";
 
 }
+
+// -------------------------------------------------
+//             Funciones Globales
+// -------------------------------------------------
+
+function buscarUsuarioPorNombre(arreglo, nombreUsuario) {
+    let resultado = null;
+    let i = 0;
+    while (resultado == null && i < arreglo.length) {
+        let usuarioActual = arreglo[i];
+        if (usuarioActual.nombreUsuario == nombreUsuario) {
+            resultado = usuarioActual;
+        }
+        i++;
+    }
+    return resultado;
+}
+
+
+// -------------------------------------------------
+//             Registro de Usuario Persona
+// -------------------------------------------------
+
+function btnRegistrarseHandler() {
+    let mensaje = "";
+    const usuarioIngresado = document.querySelector("#txtRegistroUsuario").value;
+    const passwordIngresado = document.querySelector("#txtRegistroPassword").value;
+
+    //definir: registrarUsuarioPersona(usuarioIngresado, passwordIngresado);
+    
+    if (!existeUsuario(usuarioIngresado)) {
+        // registrarUsuarioPersona(usuarioIngresado, passwordIngresado);
+        mensaje = "Usuario registrado";
+        vaciarCampos();
+    } else {
+        mensaje = "El usuario ya existe";
+    }
+    document.querySelector("#divRegistroMensajes").innerHTML = mensaje;
+}
+
+
+// -------------------------------------------------
+//             Funciones de Registro de Usuario Persona
+// -------------------------------------------------
+
+function existeUsuario(nombreUsuario){  
+    //devuelve boolean dependiendo si el usuario es existente e
+    let retorno = false;
+    //busqueda en listado de usuarios Local
+    let usuarioLocalEncontrado = buscarUsuarioPorNombre(usuariosLocal, nombreUsuario);
+    //busqueda en listado de usuarios Persona
+    let usuarioPersonaEncontrado = buscarUsuarioPorNombre(usuariosPersona, nombreUsuario);
+    //si la busqueda es distinta de null entonces se encuentra el usuario
+    if (usuarioLocalEncontrado != null || usuarioPersonaEncontrado != null){
+    retorno = true;
+    }
+    return retorno;
+    }
+    
+
+
+// -------------------------------------------------
+//             Funciones Login
+// -------------------------------------------------
+
+function btnLoginIngresarHandler(){
+
+usuarioEstaLogueado = true;
+if(tipoDeUsuarioLogueado == 2){
+    mostrarPantallaPersonaLogueada();
+}else if(tipoDeUsuarioLogueado ==1){
+    mostrarPantallaLocalLogueado();
+}else{
+
+}
+
+}
+
+
+
+
+

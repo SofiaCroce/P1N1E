@@ -15,31 +15,73 @@
       <img id="logo" src="https://develotion.com/p1/2022_03/icon.png" alt="logo">
 
       <ul id="navPrincipal">
-        
+
+        <li id="btnMenuHome">
+          <a>Home</a>
+        </li>
+
         <li id="btnMenuLogin">
           <a>Ingresar</a>
         </li>
         <li id="btnMenuRegistro">
           <a>Registro</a>
         </li>
-        <li id="btnMenuHome">
-          <a>Home</a>
-        </li>
+        
         <!-- <li id="btnMenuListaUsuarios">
           <a>Gestión de usuarios</a>
         </li>
         <li id="btnMenuAltaPublicacion">
           <a>Publicar</a>
-        </li>
+        </li> -->
         <li id="btnMenuCerrarSesion">
           <a>Salir</a>
-        </li> -->
+        </li>
       </ul>
       <!--<div id="aux">
         <a>Menú alt. 1</a> | <a>Menú alt. 2</a>
       </div>-->
       <!-- FIN AUX -->
     </div><!-- FIN CABEZAL -->
+
+
+    <div id="cabezalPersona" class="clearfix">
+
+      <ul id="navSecundarioPersona">
+        
+        <li id="btnReservasPendientesPersonaMenu">
+          <a>Reservas Pendientes</a>
+        </li>
+        <li id="btnReservasFinalizadasPersonaMenu">
+          <a>Reservas Finalizadas</a>
+        </li>
+        <li id="btnReservarPersonaMenu">
+          <a>Reservar</a>
+        </li>
+        <li id="btnEstadisticasPersonaMenu">
+          <a>Estadísticas</a>
+        </li>
+       
+      </ul>
+      
+    </div>
+
+    <div id="cabezalLocal" class="clearfix">
+
+      <ul id="navSecundarioLocal">
+        
+        
+        <li id="btnAdministrarReservasLocalMenu">
+          <a>Administrar Reservas</a>
+        </li>
+        <li id="btnEstadisticasLocalMenu">
+          <a>Estadisticas</a>
+        </li>
+        <li id="btnAdministrarLocalMenu">
+          <a>Administrar</a>
+        </li>
+      </ul>
+      
+    </div>
 
     <div id="contenido">
 
@@ -64,7 +106,7 @@
         <label for="txtRegistroPassword">Password:</label>
         <input id="txtRegistroPassword" type="password">
         <br><br>
-        <input type="button" value="Registrarse" id="btnRegistroRegistrarse">
+        <input type="button" value="Registrarse" id="btnRegistrarse">
         <br><br>
         <div id="divRegistroMensajes"></div>
       </div>
@@ -73,65 +115,180 @@
         <h3>Home</h3>
         <h1>Bienvenido</h1>
       </div>
+       <!-- Realizar Reserva en Local -->
+    <!-- ------------------------------------------------------- -->
 
-      <!-- <div id="divAltaPublicacion">
-        <h3>Publicar</h3>
-        <label for="fileAltaPublicacionFoto">Imagen:</label>
-        <input id="fileAltaPublicacionFoto" type="file">
-        <br><br>
-        <label for="txtAltaPublicacionTitulo">Título:</label>
-        <input id="txtAltaPublicacionTitulo" type="text">
-        <br><br>
-        <label for="txtAltaPublicacionDescripcion">Descripción:</label>
-        <textarea id="txtAltaPublicacionDescripcion"></textarea>
-        <br><br>
-        <select id="comboAltaPublicacionCategoria"></select>
-        <br><br>
-        <input type="button" value="Guardar" id="btnAltaPublicacionGuardar">
-        <br><br>
-        <div id="divAltaCategoriaMensajes"></div>
-      </div> -->
+    <div id="realizarReserva">
+      <label for="localAReservar">Local:</label>
+      <select name="localAReservar" id="localAReservar">
+          <option selected value="1">Local 1</option>
+          <option value="2">Local 2</option>
+      </select>
+      <br>
+      <br>
+      <label for="cantidadAReservar">Cupos a reservar:</label>
+      <input type="number" id="cantidadAReservar">
+  <br>
+  <br>
+  <input type="button" id="btnRealizarReserva" value="Reservar">
+  <hr>
+  </div>
 
-      <!-- <div id="divGestionDeUsuarios">
-        <h3>Gestión de usuarios</h3>
-        <div>
-          <label for="comboGestionDeUsuariosTipoUsuario">Filtro</label>
-          <select id="comboGestionDeUsuariosTipoUsuario"></select>
-          <input type="button" value="Filtrar" id="btnGestionDeUsuariosFiltrar">
-        </div>
-        <br>
-        <table>
-          <thead>
-            <tr>
-              <th>Usuario</th>
-              <th>Tipo</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="bodyTablaGestionUsuarios">
-          </tbody>
-        </table>
-      </div> -->
-      <!--<hr>
+    
+<!-- ESTADISTICAS -->
+  <!-- ------------------------------------------------------- -->
+
+  <div id="infoEstadistica">
+    <!-- INFORMACION DE LOCAL -->
+    
+            <div id="infoEstadisticaLocal">
+                <h3>Local</h3>
+                <p id="pPorcentajeDeOcpacion">Ocupación 20%</p>
+    
+                <p id="pPromedioDeCalificacion">Calificación del local : 4.9</p>
+    
+                <h4>Listado de calificaciones por local.</h4>
+                <ul id="ulListadoDeCalificaciones">
+                    <li>local 1: 4.3</li>
+                    <li>local 2: 3.3</li>
+                    <li>local 3: 4.0</li>
+                    <li>local 4: 4.5</li>
+                </ul>
+            <h4>Reservas.</h4>
+                <p id="pTotalDeReservas">Total de reservas: 52</p>
+                <p id="pTotalDeReservasPendientes">Total de pendientes: 22</p>
+                <p id="pTotalDeReservasFinalizadas">Total de finalizadas: 30</p>
+            </div> 
+                
+    <!-- INFORMACION PERSONA -->
+    
+                <div id="infoEstadisticaPersona">
+                    <h3>Persona</h3>
+                    <h4>Listado de locales con reservas completadas.</h4>
+                    <ul id="ulListadoDeReservasCompletadas">
+                        <li>local 1  \ 15 reservas hechas \ Reservas taltales del local : 50 \ 7.5  % de resevas hechas por el usuario</li>
+                        <li>local 2: \ 2  reservas hechas \ Reservas taltales del local : 33 \ 6.6  % de resevas hechas por el usuario</li>
+                        <li>local 4: \ 9  reservas hechas \ Reservas taltales del local : 42 \ 37.8 % de resevas hechas por el usuario</li>
+                    </ul>
+                <h4>Local con mas reservas hechas.</h4>
+    
+                <ul id="ulLocalConMasReservas">
+                    <li>local 1  \ 15 reservas hechas</li>
+                </ul>
+                   
+    
+    
+            </div>
+    
+    
+      </div>
+              <!-- Reservas Pendientes -->
+    <!-- ------------------------------------------------------- -->
+<div id="reservasPendientes">
+  <ul>
+    <li>
+      <img id="logo" src="https://develotion.com/p1/2022_03/icon.png" alt="logo">
+local 1 / 10 cupos  <a href="#">Ver</a>
+    </li>
+    <li>
+      <img id="logo" src="https://develotion.com/p1/2022_03/icon.png" alt="logo">
+local 2 / 3 cupos  <a href="#">Ver</a>
+    </li>
+    <li>
+      <img id="logo" src="https://develotion.com/p1/2022_03/icon.png" alt="logo">
+local 3 / 25 cupos  <a href="#">Ver</a>
+    </li>
+    <li>
+      <img id="logo" src="https://develotion.com/p1/2022_03/icon.png" alt="logo">
+local 4 / 7 cupos  <a href="#">Ver</a>
+    </li>
+   
+  </ul>
+</div>
+
+<!-- ------------------------------------------------------- -->
+
+      <!-- calificar RESERVA FINALIZADA -->
+    <!-- ------------------------------------------------------- -->
+    <div id="reservasFinalizadas">
+    
+    <br>
+    <fieldset>
+      <legend>Puntua tu reserva</legend>
+      <label>
+          <input type="radio" name="numero" value="1"> 1
+      </label>
+      <label>
+          <input type="radio" name="numero" value="2"> 2
+      </label>
+      <label>
+          <input type="radio" name="numero" value="3"> 3
+      </label>
+      <label>
+          <input type="radio" name="numero" value="4"> 4
+      </label>
+      <label>
+          <input type="radio" name="numero" value="5"> 5
+      </label>
+    <br>
+    <br>
+      <input type="button" id="btnPuntuar" value="Puntuar">
+    </fieldset>
+    
+    <hr>
+    </div>
+
+    <!-- ADMINISTRAR LOCAL -->
+    <!-- ------------------------------------------------------- -->
+    <div id="administrarLocal">
+      <label for="habilitarDisponibilidad">Habilitar disponibilidad:</label>
+      <br>
+      <br>
+      <select name="habilitarDisponibilidad" id="habilitarDisponibilidad">
+          <option selected value="Habilitado">Habilitado</option>
+          <option value="Deshabilitado">Deshabilitado</option>
+      </select>
       <hr>
-      <div class="interior">
-        <div>
-          <h2>Contenido 1</h2>
-          <img src="img/foto1.jpg">
-          <p>Donec dapibus arcu a diam commodo, vel vehicula orci volutpat. Vestibulum convallis tempor mattis. Donec
-            molestie semper leo vel luctus. Curabitur quis nisi maximus, luctus lorem quis, dignissim augue.</p>
-          <input type="button" value="Ejecutar acción">
-        </div>
-        <hr>
-        <div>
-          <h2>Contenido 2</h2>
-          <img src="img/foto2.jpg">
-          <p>Donec dapibus arcu a diam commodo, vel vehicula orci volutpat. Vestibulum convallis tempor mattis. Donec
-            molestie semper leo vel luctus. Curabitur quis nisi maximus, luctus lorem quis, dignissim augue.</p>
-          <input type="button" value="Ejecutar acción">
-        </div>
-      </div>-->
-      <!--FIN ELEMENTOS-->
+      <label for="txtCupoMaximo">Modificar cupo maximo:</label>
+      <br>
+      <br>
+        <input id="txtCupoMaximo" type="number">
+  <hr>
+  </div>
+   
+         <!-- CAMBIAR ESTADO DE RESERVA -->
+    <!-- ------------------------------------------------------- -->
+
+<div id="adminReserva">
+  <label for="buscadorDeReservas">Buscar una Reserva:</label>
+  <input type="text" id="buscadorDeReservas" placeholder="Ingrese palabra clave...">
+  <input type="button" value="Buscar" id="btnBuscarReservas">
+  <br>
+  <br>
+  <h3>Lista de Reservas Pendientes:</h3>
+  <ul>
+      <li>Reserva Asiento 1 Fila 8
+      <div id="reservaPendiente01">
+          <label for="estadoReserva01">Estado de la Reserva:</label>
+          <select id="estadoReserva01">
+              <option selected value="pendiente">Pendiente</option>
+              <option value="finalizado">Finalizado</option>
+          </select>
+      </div>
+      </li>
+      <li>Reserva Asiento 2 Fila 8
+      <div id="reservaPendiente02">
+          <label for="estadoReserva02">Estado de la Reserva:</label>
+          <select id="estadoReserva02">
+              <option selected value="pendiente">Pendiente</option>
+              <option value="finalizado">Finalizado</option>
+          </select>
+      </div>
+      </li>
+  </ul>
+  <button id="btnGuardarCambiosReservas">Guardar Cambios</button>
+  <hr>
+</div>
     </div><!-- FIN CONTENIDO -->
 
     <div id="pie">

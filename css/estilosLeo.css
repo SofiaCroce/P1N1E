@@ -1,0 +1,245 @@
+@charset "utf-8";
+/* CSS Document */
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz@8..144&display=swap");
+
+
+/* FORMATO DE TEXTOS */
+/* ------------------------------------------------------------------------- */
+header h1 {
+  letter-spacing: 2px;
+  margin-left: 110px;
+  color: white;
+}
+h1,
+h2,
+h3,
+h5,
+h6 {
+  font-family: "Roboto Flex", sans-serif;
+}
+
+h2 {
+  width: 60%;
+}
+
+h4 {
+  float: right;
+  font-weight: 400;
+  width: 30%;
+  margin-top: 26px;
+  text-align: right;
+}
+
+/* FORMATOS EN INPUTS */
+/* ------------------------------------------------------------------------- */
+
+textarea {
+  min-height: 80px;
+}
+
+label {
+  min-width: 80px;
+  text-align: left;
+  display: inline-block;
+  vertical-align: top;
+}
+
+input,
+select,
+textarea {
+  background-color: #303036;
+  color: #fffaff;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  font-family: "Roboto Flex", sans-serif;
+  min-width: 200px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+
+/* BODY Y HTML */
+/* ------------------------------------------------------------------------- */
+
+body {
+  font-family: "Roboto Flex", sans-serif;
+  background-color: black;
+  background-image: url("../img/fondoPrincipal.jpg");
+  background-size: cover;
+}
+
+
+/* CABEZAL */
+/* ------------------------------------------------------------------------- */
+header {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 100;
+
+  margin: 0 auto;
+  width: 1200px;
+
+  background-color: #d7d1603b;
+  background-image: url("../img/fondoHeader.png");
+  background-size: 100%;
+  background-position: bottom left;
+  
+  border: solid 3px #f0c165;
+  border-radius: 100px 20px 100px 20px;
+  
+  
+}
+
+#logo {
+  background-color: #000;
+  border: solid 5px #000;
+  border-radius: 100%;
+  margin: 0 20px;
+  width: 70px;
+  height: 70px;
+}
+
+
+/* CONTENIDO PRINCIPAL */
+/* ------------------------------------------------------------------------- */
+main {
+  margin: 0 auto;
+  width: 1200px;
+  height: 600px;
+  color: white;
+  background-color: black;
+  background-image: url("../img/fondoPrincipal.jpg");
+  /* border: solid 3px #f0c165; */
+  border: solid 5px black;
+  
+  border-radius: 40px;
+  box-shadow: 20px -20px 20px#000, 20px 20px 20px#000, -5px 5px 20px #f0c165;
+}
+
+/* MENUS */
+/* ------------------------------------------------------------------------- */
+#navPrincipal,
+#navSecundarioLocal,
+#navSecundarioPersona {
+  max-width: 600px;
+  margin-right: 20px;
+  margin-top: 5px;
+  
+  display: flex;
+}
+
+#navSecundarioLocal,
+#navSecundarioPersona {
+  margin: 0;
+  padding: 5px;
+  
+  background-color: #030303ca;
+  background-image: url("../img/fondoHeader.png");
+  background-size: cover;
+
+  border-bottom: 2px solid #f0c165;
+  border-radius: 40px 0 40px 0;
+  box-shadow: 0px 0px 10px #f0c165;
+  /* box-shadow: -5px 5px 5px #a28b47, 2px 2px 2px #a28b47; */
+}
+
+
+#navPrincipal li,
+#navSecundarioLocal li,
+#navSecundarioPersona li {
+  font-family: "Roboto Flex", sans-serif;
+  list-style-type: none;
+  margin: 5px;
+  padding: 10px;
+  border-bottom: 3px solid #f0c165;
+  
+}
+
+
+#navPrincipal a,
+#navSecundarioLocal a,
+#navSecundarioPersona a {
+  color: #fffaff;
+  cursor: pointer;
+  color: #fff;
+  font-size: 14px;
+}
+
+
+#divLogin,
+#divRegistro,
+#divHome {
+  text-align: center;
+}
+/* CONTENIDO Y PANTALLAS */
+/* ------------------------------------------------------------------------- */
+#contenido {
+  height: 80%;
+  padding: 20px;
+}
+
+#contenido img {
+  max-width: 100%;
+  margin-bottom: 1%;
+}
+
+/* PANTALLAS PERSONA */
+/* ------------------------------------------------------------------------- */
+#reservasPendientes {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.467);
+  border: solid 4px white;
+  overflow: scroll;
+  height: 450px;
+}
+
+/* PIE DEL WORCKSPACE */
+/* ------------------------------------------------------------------------- */
+#pie {
+  background-color: #000;
+  background-image: url("../img/fondoHeader.png");
+  border: solid 3px #f0c165;
+  background-position: top right;
+  border-radius: 20px 20px 40px 40px;
+  box-shadow: 5px -5px 15px #a28b472c, 5px 5px 15px #a28b470f,
+    -5px 5px 15px #f0c165;
+
+  margin: 0 auto;
+  width: 1160px;
+  clear: both;
+  padding: 20px;
+  color: #fff;
+  font-size: 12px;
+}
+
+#pie a {
+  text-decoration: none;
+  color: #fff;
+}
+
+
+/* FORMATOS DE TABLAS AUN NO IMPLEMENTADO */
+/* ------------------------------------------------------------------------- */
+table,
+th,
+td {
+  border-collapse: collapse;
+  border: #000 1px solid;
+  padding: 5px;
+  background-color: #fff;
+}
+
+table img,
+td > input[type="button"] {
+  width: 100px;
+  min-width: 50px;
+}
+
+th {
+  background-color: #303036;
+  color: #fff;
+  font-weight: normal;
+}
+

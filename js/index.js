@@ -83,7 +83,7 @@ function precargarTipoEstadoDeReserva () {
 //              Carga de objetos
 // -------------------------------------------------
 function precargaDeUsuarios() {
-    precargarUsuarioLocal ();
+    precargarUsuarioLocal();
     precargarUsuarioPersona();
 }
 
@@ -306,10 +306,10 @@ function btnAdministrarLocalMenuHandler(){
 // ---------------------------------------------------------------------------
 function ocultarPantallas() {
     vaciarCampos();
-    // PERSONA
+
+// PERSONA
     // Menu
     document.querySelector("#cabezalPersona").style.display = "none";
-
     // estadisticas
     document.querySelector("#infoEstadisticaPersona").style.display = "none";
     // reservar
@@ -319,7 +319,7 @@ function ocultarPantallas() {
     // reservas pendientes
     document.querySelector("#reservasPendientes").style.display = "none";
 
-    //LOCAL
+//LOCAL
     document.querySelector("#cabezalLocal").style.display = "none";
     // estadisticas
     document.querySelector("#infoEstadisticaLocal").style.display = "none";

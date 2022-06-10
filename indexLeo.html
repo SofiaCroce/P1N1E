@@ -215,6 +215,22 @@
               <!-- Reservas Pendientes -->
     <!-- ------------------------------------------------------- -->
 <div id="reservasPendientes">
+
+  <table>
+    <thead>
+      <tr>
+        <th>Foto</th>
+        <th>Local</th>
+        <th>Cupos</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="bodyTablaReservasPendientes">
+    </tbody>
+  </table>
+
+
+<!--   
   <ul>
     <li>
       <img  src="https://develotion.com/p1/2022_03/icon.png" alt="logo">
@@ -239,37 +255,55 @@ local 4 / 7 cupos  <a href="#">Ver</a>
     </li>
    
   </ul>
-</div>
+</div> -->
 
+
+</div>
 
       <!-- calificar RESERVA FINALIZADA -->
   <!-- ------------------------------------------------------- -->
     <div id="reservasFinalizadas">
     
     <br>
-    <fieldset>
+    <table>
+      <thead>
+        <tr>
+          <th>Foto</th>
+          <th>Local</th>
+          <th>Cupos</th>
+          <th>Puntuacion</th>
+          <th>Acciones</th>
+          
+        </tr>
+      </thead>
+      <tbody id="bodyTablaPuntuarReservasFinalizadas">
+      </tbody>
+    </table>
+
+
+    <!-- <fieldset>
       <legend>Puntua tu reserva</legend>
       <label>
-          <input type="radio" name="numero" value="1"> 1
+          1<input type="radio" name="numero" value="1">
       </label>
       <label>
-          <input type="radio" name="numero" value="2"> 2
+          2<input type="radio" name="numero" value="2">
       </label>
       <label>
-          <input type="radio" name="numero" value="3"> 3
+          3<input type="radio" name="numero" value="3">
       </label>
       <label>
-          <input type="radio" name="numero" value="4"> 4
+          4<input type="radio" name="numero" value="4">
       </label>
       <label>
-          <input type="radio" name="numero" value="5"> 5
+          5<input type="radio" name="numero" value="5">
       </label>
     <br>
     <br>
       <input type="button" id="btnPuntuar" value="Puntuar">
-    </fieldset>
+    </fieldset> -->
     
-    <hr>
+
     </div>
 
  <!-- ------------------------------------------------------- --> 
@@ -301,7 +335,21 @@ local 4 / 7 cupos  <a href="#">Ver</a>
     <!-- ------------------------------------------------------- -->
 
 <div id="adminReserva">
-  <label for="buscadorDeReservas">Buscar una Reserva:</label>
+  
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Cupos</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="bodyTablaReservasPendientesLocal">
+    </tbody>
+  </table>
+
+  <!-- <label for="buscadorDeReservas">Buscar una Reserva:</label>
   <input type="text" id="buscadorDeReservas" placeholder="Ingrese palabra clave...">
   <input type="button" value="Buscar" id="btnBuscarReservas">
   <br>
@@ -328,7 +376,7 @@ local 4 / 7 cupos  <a href="#">Ver</a>
       </li>
   </ul>
   <button id="btnGuardarCambiosReservas">Guardar Cambios</button>
-  <hr>
+  <hr> -->
   </div>
 </section>
 
@@ -348,6 +396,7 @@ local 4 / 7 cupos  <a href="#">Ver</a>
 <!-- scripts -->
   <script type="text/javascript" src="js/clases.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
+ 
 </body>
 
 </html>

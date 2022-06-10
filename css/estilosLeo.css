@@ -39,7 +39,7 @@ textarea {
 }
 
 label {
-  min-width: 80px;
+  min-width: 30px;
   text-align: left;
   display: inline-block;
   vertical-align: top;
@@ -53,7 +53,7 @@ textarea {
   border: 1px solid #ccc;
   padding: 5px 10px;
   font-family: "Roboto Flex", sans-serif;
-  min-width: 200px;
+  /* min-width: 200px; */
   border-radius: 5px;
   font-size: 14px;
 }
@@ -190,10 +190,61 @@ main {
 #reservasPendientes {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.467);
-  border: solid 4px white;
+  border: solid 4px #f0c165;
   overflow: scroll;
   height: 450px;
 }
+/* Reservar */
+/* ------------------------------------------------------------------------- */
+#realizarReserva label{
+width: 200px;
+}
+
+#realizarReserva input{
+  width: 200px;
+  }
+
+  #realizarReserva #localAReservar{
+   
+    width: 220px
+    }
+
+
+/* Reservas finalizadas */
+/* ------------------------------------------------------------------------- */
+    #reservasFinalizadas{
+      margin: 0 auto;
+      width: 600px;
+    }
+
+    /* #reservasFinalizadas label{
+     
+          }
+    #reservasFinalizadas label input{
+   width: 10px;
+      position: absolute;
+                } */
+  #reservasFinalizadas table td fieldset{
+    display: flex;
+  
+   /* width: 400px; */
+  }
+
+  #reservasFinalizadas table td fieldset label{
+    position: relative;
+    width: 5px;
+  
+   /* width: 400px; */
+  }
+  #reservasFinalizadas table td fieldset label input{
+    width: 10px;
+    position: absolute;
+  
+   /* width: 400px; */
+  }
+
+/* Registro */
+/* ------------------------------------------------------------------------- */
 
 /* PIE DEL WORCKSPACE */
 /* ------------------------------------------------------------------------- */
@@ -222,13 +273,24 @@ main {
 
 /* FORMATOS DE TABLAS AUN NO IMPLEMENTADO */
 /* ------------------------------------------------------------------------- */
+
 table,
 th,
 td {
+  
+  text-align: center;
+  color: #000;
   border-collapse: collapse;
-  border: #000 1px solid;
+  border: #f0c165 1px solid;
   padding: 5px;
-  background-color: #fff;
+  background-color: #f0c26555;
+}
+table{
+  margin: 0 auto;
+  width: 600px;
+  
+  box-shadow: 5px -5px 15px #a28b472c, 5px 5px 15px #a28b470f,
+  -5px 5px 15px #f0c165;
 }
 
 table img,
@@ -238,8 +300,9 @@ td > input[type="button"] {
 }
 
 th {
-  background-color: #303036;
-  color: #fff;
+  width: 200px;
+  background-color: #2d2d2d;
+  color: white;
   font-weight: normal;
 }
 

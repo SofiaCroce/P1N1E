@@ -396,7 +396,7 @@ function buscarUsuarioPorNombre(arreglo, nombreUsuario) {
     let i = 0;
     while (resultado == null && i < arreglo.length) {
         let usuarioActual = arreglo[i];
-        if (usuarioActual.nombreUsuario == nombreUsuario) {
+        if (usuarioActual.nombreUsuario.toLowerCase()  == nombreUsuario.toLowerCase() ) {
             resultado = usuarioActual;
         }
         i++;
@@ -432,8 +432,13 @@ function btnRegistrarseHandler() {
     
     if (!existeUsuario(usuarioIngresado)) {
         // registrarUsuarioPersona(usuarioIngresado, passwordIngresado);
-        mensaje = "Usuario registrado";
-        vaciarCampos();
+        if(validarPassword(passwordIngresado).key == 0){
+            mensaje = "Usuario registrado";
+            vaciarCampos();
+        }else{
+            mensaje = validarPassword(passwordIngresado).msj;
+        }
+       
     } else {
         mensaje = "El usuario ya existe";
     }
@@ -512,15 +517,15 @@ for (let i = 0; i < pass.length; i++) {
 }
 
 if(!tieneSeisCaracteres){
-    return {id:1,mensaje: "debe tener al menos 6 caracteres"};
+    return {id:1, msj: "debe tener al menos 6 caracteres"};
 }else if(!tieneMayus){
-    return {id:2,mensaje: "debe tener al menos una mayus"};
+    return {id:2,msj: "debe tener al menos una mayus"};
 }else if(!tieneMinus){
-    return {id:3,mensaje: "debe tener al menos una minus"};
+    return {id:3,msj: "debe tener al menos una minus"};
 }else if(!tieneNumeros){
-    return {id:3,mensaje: "debe tener al menos un num"};
+    return {id:3,msj: "debe tener al menos un num"};
 }else{
-    return {id:0,mensaje: "pass correcto"};
+    return {id:0,msj: "pass correcto"};
 }
 
 }
@@ -552,68 +557,68 @@ console.log("cupos disponibles = "+cuposDisponibles(2));
 
 // RESERVAS PENDIENTES
 // Crear tabla de reservas pendientes por usuario
-function completarTablaReservasPendientes() {
-    let bodyHTML = '';
-// recorro arreglo de reservas
-        for (let i = 0; i < reservas.length; i++) {
-            // nombre de los botones que se crearan en la tabla
-            let textoBoton = 'Cancelar'
-            // guardo la reserva de esta iteracion
-            let reservaActual = reservas[i];
-            // tomo su estado
-            let estado = reservaActual.estado;
+// function completarTablaReservasPendientes() {
+//     let bodyHTML = '';
+// // recorro arreglo de reservas
+//         for (let i = 0; i < reservas.length; i++) {
+//             // nombre de los botones que se crearan en la tabla
+//             let textoBoton = 'Cancelar'
+//             // guardo la reserva de esta iteracion
+//             let reservaActual = reservas[i];
+//             // tomo su estado
+//             let estado = reservaActual.estado;
            
-            // tomo su usario
-            let usuarioReserva = reservaActual.usuarioID;
-            // los valores de arriba podrian usarse directamente, 
-            // pero los guardo en variables separadas
-            // para identificarlos
+//             // tomo su usario
+//             let usuarioReserva = reservaActual.usuarioID;
+//             // los valores de arriba podrian usarse directamente, 
+//             // pero los guardo en variables separadas
+//             // para identificarlos
 
     
 
-//  si el estado es 1 "pendiente" y el id de usuario de la reserva es igual al id de usario logueado
-//  creo la fila correspondiente en la tabla
+// //  si el estado es 1 "pendiente" y el id de usuario de la reserva es igual al id de usario logueado
+// //  creo la fila correspondiente en la tabla
 
-            if(estado==1 && usuarioReserva == pruebaUsuarioActual.id){
+//             if(estado==1 && usuarioReserva == pruebaUsuarioActual.id){
 
              
 
-                // creacion del html de la fila
-                // sustitur imagen por url real
-                bodyHTML += `
-                <tr>
-                    <td>
-                    <img src="./img/logo.jpg" alt="logo">
-                    </td>
-                    <td>
-                        ${buscarLocalPorID(reservaActual.localID).nombre}
-                    </td>
-                    <td>
-                        ${reservaActual.cupos}
-                    </td>
-                    <td>
-                    <input data-usuario="${reservaActual.id}" type="button" value="${textoBoton}" class="btnCancelarReserva">
-                </td>
-                </tr>
-                `;
-            }
+//                 // creacion del html de la fila
+//                 // sustitur imagen por url real
+//                 bodyHTML += `
+//                 <tr>
+//                     <td>
+//                     <img src="./img/logo.jpg" alt="logo">
+//                     </td>
+//                     <td>
+//                         ${buscarLocalPorID(reservaActual.localID).nombre}
+//                     </td>
+//                     <td>
+//                         ${reservaActual.cupos}
+//                     </td>
+//                     <td>
+//                     <input data-usuario="${reservaActual.id}" type="button" value="${textoBoton}" class="btnCancelarReserva">
+//                 </td>
+//                 </tr>
+//                 `;
+//             }
            
-        }
+//         }
    
-// Agrego el html generado e la tabla html
-    document.querySelector("#bodyTablaReservasPendientes").innerHTML = bodyHTML;
+// // Agrego el html generado e la tabla html
+//     document.querySelector("#bodyTablaReservasPendientes").innerHTML = bodyHTML;
 
-// guardo todos los botones generados en un arreglo
-    let arrayDeBotones = document.querySelectorAll(".btnCancelarReserva");
+// // guardo todos los botones generados en un arreglo
+//     let arrayDeBotones = document.querySelectorAll(".btnCancelarReserva");
 
-    // recorro el arreglo de botones generados
-    for (let i = 0; i < arrayDeBotones.length; i++) {
-        // guardo el boton actual en variable
-        let botonActual = arrayDeBotones[i];
-        // le agrego evento click al boton actual
-        botonActual.addEventListener("click", btnCancelarReservaHandler);
-    }
-}
+//     // recorro el arreglo de botones generados
+//     for (let i = 0; i < arrayDeBotones.length; i++) {
+//         // guardo el boton actual en variable
+//         let botonActual = arrayDeBotones[i];
+//         // le agrego evento click al boton actual
+//         botonActual.addEventListener("click", btnCancelarReservaHandler);
+//     }
+// }
 
 
 function btnCancelarReservaHandler() {
@@ -629,7 +634,8 @@ function btnCancelarReservaHandler() {
     reservaACancelar.cancelarReserva();
 
 // recargo la lista
-    completarTablaReservasPendientes();
+    // completarTablaReservasPendientes();
+    completarTablaReservasSegunEstadoYUsuario(1,pruebaUsuarioActual.tipoUsuarioId);
 }
 
 // funcion para reserva
@@ -724,8 +730,12 @@ function completarTablaReservasSegunEstadoYUsuario(pEstado, pTipoUsuario){
                 if(pEstado==2 && pTipoUsuario==2 && idUsuarioReserva == pruebaUsuarioActual.id){
                         // nombre de los botones que se crearan en la tabla
                         let textoBoton = 'Puntuar'
+                        let calificacion = "Sin calificar"
+                        let data = [i , reservaActual.id ];
+                        
                         // creacion del html de la fila
                                     // sustitur imagen por url real
+                                    if(!reservaActual.calificacion==0){calificacion = reservaActual.calificacion}
                                     bodyHTML += `
                                     <tr>
                                         <td>
@@ -739,26 +749,27 @@ function completarTablaReservasSegunEstadoYUsuario(pEstado, pTipoUsuario){
                                         </td>
 
                                         <td>
+                                        <p>${calificacion}</p>
                                         <fieldset>
                                         <label>
-                                            1<input type="radio" name="numero" value="1">
+                                            1<input type="radio" name="numero${i}" value="1">
                                         </label>
                                         <label>
-                                            2<input type="radio" name="numero" value="2">
+                                            2<input type="radio" name="numero${i}" value="2">
                                         </label>
                                         <label>
-                                            3<input type="radio" name="numero" value="3">
+                                            3<input type="radio" name="numero${i}" value="3">
                                         </label>
                                         <label>
-                                            4<input type="radio" name="numero" value="4">
+                                            4<input type="radio" name="numero${i}" value="4">
                                         </label>
                                         <label>
-                                            5<input type="radio" name="numero" value="5">
+                                            5<input type="radio" name="numero${i}" value="5">
                                         </label>
                                             </td>
 
                                             <td>
-                                        <input data-usuario="${reservaActual.id}" type="button" value="${textoBoton}" class="btnFinalizarReserva">
+                                        <input data-usuario="${data}" type="button" value="${textoBoton}" class="btnPuntuarReserva">
                                         </fieldset>
                                         
                                     </td>
@@ -843,6 +854,14 @@ function completarTablaReservasSegunEstadoYUsuario(pEstado, pTipoUsuario){
                 // Agrego el html generado e la tabla html
                     document.querySelector("#bodyTablaPuntuarReservasFinalizadas").innerHTML = bodyHTML;
                 
+                    let arrayDeBotones = document.querySelectorAll(".btnPuntuarReserva");
+
+                    for (let i = 0; i < arrayDeBotones.length; i++) {
+                        // guardo el boton actual en variable
+                        let botonActual = arrayDeBotones[i];
+                        // le agrego evento click al boton actual
+                        botonActual.addEventListener("click", btnPuntuarReservaHandler);
+                    }
                     // guardo todos los botones generados en un arreglo
                         // let arrayDeBotones = document.querySelectorAll(".btnFinalizarReserva");
                     
@@ -861,6 +880,40 @@ function completarTablaReservasSegunEstadoYUsuario(pEstado, pTipoUsuario){
 
 }
     
+
+function btnPuntuarReservaHandler(){
+console.log("puntuar");
+
+
+      // Obtengo el valor del atributo data-usuario que tiene el botón que disparó el evento (click)
+    // devuelve el id de la reserva
+    let datosReservaActual = this.getAttribute("data-usuario");
+
+    //busco la reserva a puntuar
+    let reservaAPuntuar = buscarReservaPorID(datosReservaActual[2]);
+    console.log(reservaAPuntuar);
+    
+    let inputsCalificacion = document.querySelectorAll(`input[name=numero${datosReservaActual[0]}]`)
+    // console.table(inputsCalificacion);
+    for (let i = 0; i < inputsCalificacion.length; i++) {
+      if (inputsCalificacion[i].checked == true) {
+        console.log('cheauqeado '+ inputsCalificacion[i].value);
+        if(!isNaN(inputsCalificacion[i].value) && inputsCalificacion[i].value != ""){
+            reservaAPuntuar.calificar(parseInt(inputsCalificacion[i].value));
+        }
+
+      }
+    }
+    // aplico el metodo cancelar en la reserva obtenida
+ 
+
+    // reservaACancelar.finalizarReserva();
+
+// recargo la lista
+    completarTablaReservasSegunEstadoYUsuario(2,pruebaUsuarioActual.tipoUsuarioId);
+}
+
+
 function btnFinalizarReservaHandler(){
     console.log('finalizar');
 

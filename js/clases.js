@@ -110,4 +110,8 @@ class Reserva {
     this.estado = 3;
   }
 
+
+  calificar(puntaje){
+    this.calificacion = puntaje;
+  }
 }

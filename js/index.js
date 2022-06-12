@@ -384,11 +384,9 @@ function btnRegistrarseHandler() {
     let mensaje = "";
     const usuarioIngresado = document.querySelector("#txtRegistroUsuario").value;
     const passwordIngresado = document.querySelector("#txtRegistroPassword").value;
-
-    //definir: registrarUsuarioPersona(usuarioIngresado, passwordIngresado);
     
     if (!existeUsuario(usuarioIngresado)) {
-        // registrarUsuarioPersona(usuarioIngresado, passwordIngresado);
+        registrarUsuarioPersona(usuarioIngresado, passwordIngresado);
         mensaje = "Usuario registrado";
         vaciarCampos();
     } else {
@@ -401,6 +399,11 @@ function btnRegistrarseHandler() {
 // -------------------------------------------------
 //             Funciones de Registro de Usuario Persona
 // -------------------------------------------------
+
+function registrarUsuarioPersona(usuario, password) {
+    let nuevoUsuario = new UsuarioPersona(usuario, password);
+    usuariosPersona.push(nuevoUsuario);
+}
 
 function existeUsuario(nombreUsuario){  
     //devuelve boolean dependiendo si el usuario es existente e

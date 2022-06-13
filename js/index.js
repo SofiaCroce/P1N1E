@@ -355,6 +355,7 @@ function vaciarCampos() {
     document.querySelector("#txtLoginPassword").value = "";
     document.querySelector("#txtRegistroUsuario").value = "";
     document.querySelector("#txtRegistroPassword").value = "";
+    document.querySelector("#txtRegistroNombre").value = "";
 
 }
 
@@ -365,9 +366,10 @@ function vaciarCampos() {
 function buscarUsuarioPorNombre(arreglo, nombreUsuario) {
     let resultado = null;
     let i = 0;
+    //se busca dentro de cada arreglo de usuarios, que coincida el nombre de usuario
     while (resultado == null && i < arreglo.length) {
         let usuarioActual = arreglo[i];
-        if (usuarioActual.nombreUsuario == nombreUsuario) {
+        if (usuarioActual.nombreUsuario.toLowerCase() == nombreUsuario.toLowerCase()) {
             resultado = usuarioActual;
         }
         i++;
@@ -375,25 +377,98 @@ function buscarUsuarioPorNombre(arreglo, nombreUsuario) {
     return resultado;
 }
 
+function validarNombre(nombre){
+    let tieneAlMenosDosCaracteres = nombre.length >= 2;
+    let tieneNumeros = false;
+
+    for (let i=0; i < nombre.length; i++){
+        if(!isNaN(nombre[i])){
+            tieneNumeros = true;
+        } 
+    }
+
+    if(tieneAlMenosDosCaracteres && !tieneNumeros){
+        return true;
+    } else { return false;}
+}
+
+function validarPassword(pass){    
+    let tieneSeisCaracteres = pass.length >= 6;
+    let tieneMayus = false;
+    let tieneMinus = false;
+    let tieneNumeros = false;
+    
+    
+    for (let i = 0; i < pass.length; i++) {
+        let codigo = pass[i].charCodeAt();
+    
+        if(codigo>=65 && codigo <= 90){
+            tieneMayus = true;
+        }
+    
+        if(codigo>=97 && codigo <= 122){
+            tieneMinus = true;
+        }
+    
+        if(!isNaN(pass[i])){
+            tieneNumeros = true;
+        }
+        
+    }
+    
+    if(!tieneSeisCaracteres){
+        return {id:1, msj: "debe tener al menos 6 caracteres"};
+    }else if(!tieneMayus){
+        return {id:2,msj: "debe tener al menos una mayus"};
+    }else if(!tieneMinus){
+        return {id:3,msj: "debe tener al menos una minus"};
+    }else if(!tieneNumeros){
+        return {id:3,msj: "debe tener al menos un num"};
+    }else{
+        return {id:0,msj: "pass correcto"};
+    }
+    
+    }
+
 
 // -------------------------------------------------
 //             Registro de Usuario Persona
 // -------------------------------------------------
 
+// funcion del evento del boton para registrar un usuario Persona
 function btnRegistrarseHandler() {
     let mensaje = "";
+    let mensajePassword = "La contraseña deberá tener al menos 6 caracteres, una mayúscula, una minúscula y un número";
     const usuarioIngresado = document.querySelector("#txtRegistroUsuario").value;
     const passwordIngresado = document.querySelector("#txtRegistroPassword").value;
+    const nombreIngresado = document.querySelector("#txtRegistroNombre").value;
 
-    //definir: registrarUsuarioPersona(usuarioIngresado, passwordIngresado);
-    
-    if (!existeUsuario(usuarioIngresado)) {
-        // registrarUsuarioPersona(usuarioIngresado, passwordIngresado);
-        mensaje = "Usuario registrado";
-        vaciarCampos();
+
+    if (usuarioIngresado !== "" && passwordIngresado !== "" && nombreIngresado !== ""){
+        //condicional para validar si el nombre de usuario coincide con uno ya creado previamente
+        if (!existeUsuario(usuarioIngresado)) {
+            let retorno = validarPassword(passwordIngresado);
+            if(retorno.id == 0){
+               let nombreEsValido = validarNombre(nombreIngresado);
+                if(nombreEsValido == true){
+            //si no existe un usuario persona o local con el mismo nombre, creamos un nuevo usuario con el nombre y contraseña ingresados
+            registrarUsuarioPersona(usuarioIngresado, passwordIngresado, nombreIngresado);
+            mensaje = "Usuario registrado";
+            vaciarCampos();
+                } else { 
+                    mensaje = "El Nombre debe tener al menos dos letras y no contener números."}
+            } else {
+                mensaje = mensajePassword + ', (' + retorno.msj + ')';
+            }
+        }     
+        else {
+            //si hay coincidencia de nombre de usuario local o persona, se muestra el mensaje
+            mensaje = "El usuario ya existe";
+        }
     } else {
-        mensaje = "El usuario ya existe";
+        mensaje = "Todos los campos son obligatorios."
     }
+    
     document.querySelector("#divRegistroMensajes").innerHTML = mensaje;
 }
 
@@ -402,8 +477,14 @@ function btnRegistrarseHandler() {
 //             Funciones de Registro de Usuario Persona
 // -------------------------------------------------
 
+function registrarUsuarioPersona(usuario, password, nombre) {
+    //creando una nueva instancia de la clase UsuarioPersona
+    let nuevoUsuario = new UsuarioPersona(usuario, password, nombre);
+    usuariosPersona.push(nuevoUsuario);
+}
+
 function existeUsuario(nombreUsuario){  
-    //devuelve boolean dependiendo si el usuario es existente e
+    //devuelve boolean dependiendo si el usuario es existente
     let retorno = false;
     //busqueda en listado de usuarios Local
     let usuarioLocalEncontrado = buscarUsuarioPorNombre(usuariosLocal, nombreUsuario);
@@ -415,14 +496,14 @@ function existeUsuario(nombreUsuario){
     }
     return retorno;
     }
-    
-
 
 // -------------------------------------------------
 //             Funciones Login
 // -------------------------------------------------
 
 function btnLoginIngresarHandler(){
+
+
 
 usuarioEstaLogueado = true;
 if(tipoDeUsuarioLogueado == 2){

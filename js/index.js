@@ -393,18 +393,18 @@ function vaciarCampos() {
 //             Funciones Globales
 // -------------------------------------------------
 
-// function buscarUsuarioPorNombre(arreglo, nombreUsuario) {
-//     let resultado = null;
-//     let i = 0;
-//     while (resultado == null && i < arreglo.length) {
-//         let usuarioActual = arreglo[i];
-//         if (usuarioActual.nombreUsuario.toLowerCase()  == nombreUsuario.toLowerCase() ) {
-//             resultado = usuarioActual;
-//         }
-//         i++;
-//     }
-//     return resultado;
-// }
+function buscarUsuarioPorNombre(arreglo, nombreUsuario) {
+    let resultado = null;
+    let i = 0;
+    while (resultado == null && i < arreglo.length) {
+        let usuarioActual = arreglo[i];
+        if (usuarioActual.nombreUsuario.toLowerCase()  == nombreUsuario.toLowerCase() ) {
+            resultado = usuarioActual;
+        }
+        i++;
+    }
+    return resultado;
+}
 
 
 function buscarUsuarioPorID(arreglo, idUsuario) {
@@ -414,7 +414,7 @@ function buscarUsuarioPorID(arreglo, idUsuario) {
     while (resultado == null && i < arreglo.length) {
         let usuarioActual = arreglo[i];
 
-        if (usuarioActual.nombreUsuario.toLowerCase() == nombreUsuario.toLowerCase()) {
+        if (usuarioActual.id == idUsuario) {
 
             resultado = usuarioActual;
         }

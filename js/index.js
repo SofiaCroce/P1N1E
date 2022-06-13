@@ -4,7 +4,7 @@
 // -------------------------------------------------
 //              VARIABLES GLOBALES Y DATOS
 // -------------------------------------------------
-
+//prueba
 //Harcodeo el usuario que logeo para mostrar la pantalla, hay que cambiarlo luego
 // 2 usuario persoa
 // 1 local 

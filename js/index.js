@@ -424,27 +424,27 @@ function buscarUsuarioPorID(arreglo, idUsuario) {
 //             Registro de Usuario Persona
 // -------------------------------------------------
 
-function btnRegistrarseHandler() {
-    let mensaje = "";
-    const usuarioIngresado = document.querySelector("#txtRegistroUsuario").value;
-    const passwordIngresado = document.querySelector("#txtRegistroPassword").value;
+// function btnRegistrarseHandler() {
+//     let mensaje = "";
+//     const usuarioIngresado = document.querySelector("#txtRegistroUsuario").value;
+//     const passwordIngresado = document.querySelector("#txtRegistroPassword").value;
 
-    //definir: registrarUsuarioPersona(usuarioIngresado, passwordIngresado);
+//     //definir: registrarUsuarioPersona(usuarioIngresado, passwordIngresado);
     
-    if (!existeUsuario(usuarioIngresado)) {
-        // registrarUsuarioPersona(usuarioIngresado, passwordIngresado);
-        if(validarPassword(passwordIngresado).key == 0){
-            mensaje = "Usuario registrado";
-            vaciarCampos();
-        }else{
-            mensaje = validarPassword(passwordIngresado).msj;
-        }
+//     if (!existeUsuario(usuarioIngresado)) {
+//         // registrarUsuarioPersona(usuarioIngresado, passwordIngresado);
+//         if(validarPassword(passwordIngresado).key == 0){
+//             mensaje = "Usuario registrado";
+//             vaciarCampos();
+//         }else{
+//             mensaje = validarPassword(passwordIngresado).msj;
+//         }
        
-    } else {
-        mensaje = "El usuario ya existe";
-    }
-    document.querySelector("#divRegistroMensajes").innerHTML = mensaje;
-}
+//     } else {
+//         mensaje = "El usuario ya existe";
+//     }
+//     document.querySelector("#divRegistroMensajes").innerHTML = mensaje;
+// }
 
 
 // -------------------------------------------------
@@ -633,43 +633,43 @@ function buscarSubCadenaEnTexto(texto,subcadena){
 
 
 // ========================================================
-function validarPassword(pass){    
-let tieneSeisCaracteres = pass.length >= 6;
-let tieneMayus = false;
-let tieneMinus = false;
-let tieneNumeros = false;
+// function validarPassword(pass){    
+// let tieneSeisCaracteres = pass.length >= 6;
+// let tieneMayus = false;
+// let tieneMinus = false;
+// let tieneNumeros = false;
 
 
-for (let i = 0; i < pass.length; i++) {
-    let codigo = pass[i].charCodeAt();
+// for (let i = 0; i < pass.length; i++) {
+//     let codigo = pass[i].charCodeAt();
 
-    if(codigo>=65 && codigo <= 90){
-        tieneMayus = true;
-    }
+//     if(codigo>=65 && codigo <= 90){
+//         tieneMayus = true;
+//     }
 
-    if(codigo>=97 && codigo <= 122){
-        tieneMinus = true;
-    }
+//     if(codigo>=97 && codigo <= 122){
+//         tieneMinus = true;
+//     }
 
-    if(!isNaN(pass[i])){
-        tieneNumeros = true;
-    }
+//     if(!isNaN(pass[i])){
+//         tieneNumeros = true;
+//     }
     
-}
+// }
 
-if(!tieneSeisCaracteres){
-    return {id:1, msj: "debe tener al menos 6 caracteres"};
-}else if(!tieneMayus){
-    return {id:2,msj: "debe tener al menos una mayus"};
-}else if(!tieneMinus){
-    return {id:3,msj: "debe tener al menos una minus"};
-}else if(!tieneNumeros){
-    return {id:3,msj: "debe tener al menos un num"};
-}else{
-    return {id:0,msj: "pass correcto"};
-}
+// if(!tieneSeisCaracteres){
+//     return {id:1, msj: "debe tener al menos 6 caracteres"};
+// }else if(!tieneMayus){
+//     return {id:2,msj: "debe tener al menos una mayus"};
+// }else if(!tieneMinus){
+//     return {id:3,msj: "debe tener al menos una minus"};
+// }else if(!tieneNumeros){
+//     return {id:3,msj: "debe tener al menos un num"};
+// }else{
+//     return {id:0,msj: "pass correcto"};
+// }
 
-}
+// }
 
 // cupos disponibles
 function cuposDisponibles(pIdDeLocal){

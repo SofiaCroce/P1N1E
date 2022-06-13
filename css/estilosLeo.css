@@ -243,6 +243,31 @@ width: 200px;
    /* width: 400px; */
   }
 
+  
+/* PANTALLAS LOCAL */
+/* ------------------------------------------------------------------------- */
+
+/* administrar reservas */
+/* ------------------------------------------------------------------------- */
+#buscadorReservasPendientesLocal{
+ margin-top: 40px;
+ margin-bottom: 20px;
+  text-align: center;
+}
+
+#buscadorReservasPendientesLocal label{
+padding-top: 5px;
+margin-right: 20px;
+}
+
+#buscadorReservasPendientesLocal input{
+  
+  margin-right: 20px;
+  }
+
+
+
+
 /* Registro */
 /* ------------------------------------------------------------------------- */
 

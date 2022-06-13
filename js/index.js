@@ -10,7 +10,7 @@
 // 1 local 
 
 
-let tipoDeUsuarioLogueado = 2 ;
+let tipoDeUsuarioLogueado = 1 ;
 let usuarioEstaLogueado= false;
 
 
@@ -147,8 +147,8 @@ function precargarReservas () {
 }
 //  borrar usuario persona cuando se programe el login
 // es solo para setear datos de un supuesto usaurio logueado
-// let pruebaUsuarioActual = usuariosLocal[1];
-let pruebaUsuarioActual = usuariosPersona[3];
+let pruebaUsuarioActual = usuariosLocal[1];
+// let pruebaUsuarioActual = usuariosPersona[3];
 
 
 // -------------------------------------------------
@@ -188,7 +188,8 @@ function cargarClickEnBotones() {
     document.querySelector("#btnAdministrarReservasLocalMenu").addEventListener("click", btnAdministrarReservasLocalMenuHandler);
 //Administrar local
     document.querySelector("#btnAdministrarLocalMenu").addEventListener("click", btnAdministrarLocalMenuHandler);
-
+    document.querySelector("#btnBuscarReservasEnLocal").addEventListener("click", btnBuscarReservasEnLocalHandler);
+    
 
 }
 
@@ -492,6 +493,146 @@ if(tipoDeUsuarioLogueado == 2){
 // console.log(validarPassword(passPureba));
 
 // validacion de password
+
+
+// bucar reservas local
+function btnBuscarReservasEnLocalHandler(){
+    let texto = document.querySelector("#buscadorDeReservas").value;
+    
+
+    if(texto != ""){
+        console.log("buscar ", texto);
+        completarTablaReservasPendientesLocalPorNombre(texto);
+    }
+
+}
+
+
+
+// Crear tabla de reservas pendientes por local y nombre de usuario
+function completarTablaReservasPendientesLocalPorNombre(subCadena) {
+    console.log(subCadena);
+    let bodyHTML = '';
+// recorro arreglo de reservas
+        for (let i = 0; i < reservas.length; i++) {
+
+            // guardo la reserva de esta iteracion
+            let reservaActual = reservas[i];
+            // tomo su estado
+            let estado = reservaActual.estado;
+           
+            // tomo su usario
+            let usuarioReserva = reservaActual.usuarioID;
+            let localReservaId = reservaActual.localID;
+            // los valores de arriba podrian usarse directamente, 
+            // pero los guardo en variables separadas
+            // para identificarlos
+
+    
+
+//  si el estado es 1 "pendiente" y el id de usuario de la reserva es igual al id de usario logueado
+//  creo la fila correspondiente en la tabla
+console.log(buscarSubCadenaEnTexto(buscarUsuarioPorID(usuariosPersona,reservaActual.usuarioID).nombre,subCadena).key);
+ 
+            if(estado==1 && localReservaId == pruebaUsuarioActual.id && buscarSubCadenaEnTexto(buscarUsuarioPorID(usuariosPersona,reservaActual.usuarioID).nombre,subCadena).key == 1){
+
+            
+                 let textoBoton = 'Finalizar'
+                            // creacion del html de la fila
+                                        // sustitur imagen por url real
+                                        bodyHTML += `
+                                        <tr>
+                                            <td>
+                                                ${buscarUsuarioPorID(usuariosPersona,reservaActual.usuarioID).nombre}
+                                            </td>
+                                            <td>
+                                                ${reservaActual.cupos}
+                                            </td>
+                                            <td>
+                                            <input data-usuario="${reservaActual.id}" type="button" value="${textoBoton}" class="btnFinalizarReserva">
+                                        </td>
+                                        </tr>
+                                        `;
+                          }                        
+                
+            }
+           
+        
+   
+            document.querySelector("#bodyTablaReservasPendientesLocal").innerHTML = bodyHTML;
+        
+            // guardo todos los botones generados en un arreglo
+                let arrayDeBotones = document.querySelectorAll(".btnFinalizarReserva");
+            
+                // recorro el arreglo de botones generados
+                for (let i = 0; i < arrayDeBotones.length; i++) {
+                    // guardo el boton actual en variable
+                    let botonActual = arrayDeBotones[i];
+                    // le agrego evento click al boton actual
+                    botonActual.addEventListener("click", btnFinalizarReservaHandler);
+                }
+
+}
+
+
+function buscarSubCadenaEnTexto(texto,subcadena){
+
+    
+
+        // controlo que no esten vacias las variables
+        if ( texto != "" && subcadena != "" ) {
+
+            // paso el texto a minuscula para ampliar las coincidencias por el case sensitive
+            texto = texto.toLowerCase();
+            subcadena = subcadena.toLowerCase();
+            subCadenas=0;
+            // recorro el texto
+            for (let i = 0 ;  i < texto.length; i++) {
+                //inicializo el texto que luego usare para comparar
+                let textoAComparar = "";
+                //recorro la subcadena buscando coincidencias con el texto
+                for (let o = 0; o < subcadena.length; o++) {
+                    //verifico que al comparar no pasarme del largo del texto
+                    if (o+i <= texto.length-1) {
+                        // guadro un texto desde i con el largo de la sub cadena
+                        //para luego comparar
+                        textoAComparar += texto[o+i];
+                    }
+                   
+                }
+                // comparo el texto, si encuentro coincidencia cuento una subcadena
+                if (textoAComparar == subcadena) {
+                    // console.log(textoAComparar);
+                    // console.log(subcadena);
+                    subCadenas++
+                }
+
+
+                }
+                
+                // console.log('sub', subCadenas);
+                if(subCadenas>0){
+                    return {key: 1 , msj:  "Se encontraron coincidencias"}
+                }else{
+                    return {key: 2 , msj: "No se encontraron coincidencias"}
+                }
+
+            }else{
+                return {key: 0 , msj: "Datos insuficientes."}
+        }
+        
+      
+
+}
+
+
+
+
+
+
+
+
+// ========================================================
 function validarPassword(pass){    
 let tieneSeisCaracteres = pass.length >= 6;
 let tieneMayus = false;
@@ -555,70 +696,8 @@ console.log("cupos disponibles = "+cuposDisponibles(2));
 // USUARIO PERSONA
 
 
-// RESERVAS PENDIENTES
-// Crear tabla de reservas pendientes por usuario
-// function completarTablaReservasPendientes() {
-//     let bodyHTML = '';
-// // recorro arreglo de reservas
-//         for (let i = 0; i < reservas.length; i++) {
-//             // nombre de los botones que se crearan en la tabla
-//             let textoBoton = 'Cancelar'
-//             // guardo la reserva de esta iteracion
-//             let reservaActual = reservas[i];
-//             // tomo su estado
-//             let estado = reservaActual.estado;
-           
-//             // tomo su usario
-//             let usuarioReserva = reservaActual.usuarioID;
-//             // los valores de arriba podrian usarse directamente, 
-//             // pero los guardo en variables separadas
-//             // para identificarlos
 
-    
 
-// //  si el estado es 1 "pendiente" y el id de usuario de la reserva es igual al id de usario logueado
-// //  creo la fila correspondiente en la tabla
-
-//             if(estado==1 && usuarioReserva == pruebaUsuarioActual.id){
-
-             
-
-//                 // creacion del html de la fila
-//                 // sustitur imagen por url real
-//                 bodyHTML += `
-//                 <tr>
-//                     <td>
-//                     <img src="./img/logo.jpg" alt="logo">
-//                     </td>
-//                     <td>
-//                         ${buscarLocalPorID(reservaActual.localID).nombre}
-//                     </td>
-//                     <td>
-//                         ${reservaActual.cupos}
-//                     </td>
-//                     <td>
-//                     <input data-usuario="${reservaActual.id}" type="button" value="${textoBoton}" class="btnCancelarReserva">
-//                 </td>
-//                 </tr>
-//                 `;
-//             }
-           
-//         }
-   
-// // Agrego el html generado e la tabla html
-//     document.querySelector("#bodyTablaReservasPendientes").innerHTML = bodyHTML;
-
-// // guardo todos los botones generados en un arreglo
-//     let arrayDeBotones = document.querySelectorAll(".btnCancelarReserva");
-
-//     // recorro el arreglo de botones generados
-//     for (let i = 0; i < arrayDeBotones.length; i++) {
-//         // guardo el boton actual en variable
-//         let botonActual = arrayDeBotones[i];
-//         // le agrego evento click al boton actual
-//         botonActual.addEventListener("click", btnCancelarReservaHandler);
-//     }
-// }
 
 
 function btnCancelarReservaHandler() {
@@ -929,5 +1008,6 @@ function btnFinalizarReservaHandler(){
     reservaACancelar.finalizarReserva();
 
 // recargo la lista
+    vaciarCampos();
     completarTablaReservasSegunEstadoYUsuario(1,pruebaUsuarioActual.tipoUsuarioId);
 }

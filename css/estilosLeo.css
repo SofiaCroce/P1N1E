@@ -24,7 +24,7 @@ h2 {
 }
 
 h4 {
-  float: right;
+  /* float: right; */
   font-weight: 400;
   width: 30%;
   margin-top: 26px;
@@ -79,7 +79,7 @@ header {
   z-index: 100;
 
   margin: 0 auto;
-  width: 1200px;
+  max-width: 1200px;
 
   background-color: #d7d1603b;
   background-image: url("../img/fondoHeader.png");
@@ -104,10 +104,13 @@ header {
 
 /* CONTENIDO PRINCIPAL */
 /* ------------------------------------------------------------------------- */
+html,body{
+  height: 85%;
+}
 main {
   margin: 0 auto;
-  width: 1200px;
-  height: 600px;
+  max-width: 1200px;
+  height: 100%;
   color: white;
   background-color: black;
   background-image: url("../img/fondoPrincipal.jpg");
@@ -173,6 +176,23 @@ main {
 #divHome {
   text-align: center;
 }
+
+#divLogin,
+#divRegistro
+{
+display: flex;
+flex-wrap: nowrap;
+}
+
+#divLogin label,
+#divRegistro label
+{
+  margin-top: 5px;
+  width: 100px;
+  display: inline-block;
+}
+
+
 /* CONTENIDO Y PANTALLAS */
 /* ------------------------------------------------------------------------- */
 #contenido {
@@ -187,12 +207,12 @@ main {
 
 /* PANTALLAS PERSONA */
 /* ------------------------------------------------------------------------- */
-#reservasPendientes {
-  width: 100%;
+ #reservasPendientes {
+  width: 90%;
   background-color: rgba(0, 0, 0, 0.467);
   border: solid 4px #f0c165;
   overflow: scroll;
-  height: 450px;
+  height: 95%;
 }
 /* Reservar */
 /* ------------------------------------------------------------------------- */
@@ -204,9 +224,9 @@ width: 200px;
   width: 200px;
   }
 
-  #realizarReserva #localAReservar{
+  #localAReservar{
    
-    width: 220px
+    width: 220px;
     }
 
 
@@ -214,7 +234,7 @@ width: 200px;
 /* ------------------------------------------------------------------------- */
     #reservasFinalizadas{
       margin: 0 auto;
-      width: 600px;
+      width: 50%;
     }
 
     /* #reservasFinalizadas label{
@@ -264,6 +284,52 @@ margin-right: 20px;
   
   margin-right: 20px;
   }
+  /* ------------------------------------------------------------------------- */
+
+  /* administrar local */
+  /* ------------------------------------------------------------------------- */
+  .fondoBlureado{
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    width: 70%;
+    position: relative;
+    border: double 10px #f0c26585;
+    border-radius: 20px;
+    box-shadow: 5px 5px 20px #f0c265bb;
+    z-index: 0;
+
+  }
+
+  .fondoBlureado::after{
+   
+    top: 0;
+    left: 0;
+    content: ' ';
+    position: absolute;
+    background-color: #ffaf0e13;
+    width: 100%;
+    height: 100%;
+    filter: blur(20px);
+    z-index: -1;
+  }
+
+  hr{
+    margin: 30px;
+    border: solid 1px #f0c165;
+    background-color: #f0c165;
+    box-shadow: 20px -20px 20px#000, 20px 20px 20px#000, -5px 5px 20px #f0c165;
+
+    
+  }
+
+  #pMensajeHabilitarLocal,#pMensajeModificarCupoMaximo{
+  height: 20px;
+}
+
+#txtCupoMaximo{
+  width: 80px;
+}
 
 
 
@@ -283,7 +349,7 @@ margin-right: 20px;
     -5px 5px 15px #f0c165;
 
   margin: 0 auto;
-  width: 1160px;
+  max-width: 1160px;
   clear: both;
   padding: 20px;
   color: #fff;
@@ -323,7 +389,9 @@ td > input[type="button"] {
   width: 100px;
   min-width: 50px;
 }
-
+#imgAReservar{
+  width: 300px;
+}
 th {
   width: 200px;
   background-color: #2d2d2d;
@@ -331,3 +399,33 @@ th {
   font-weight: normal;
 }
 
+/* MEDIA QUERYS */
+/* --------------------------------------------------- */
+@media (max-width: 800px) {
+
+main{
+  height: 100%;
+}
+ header{
+  justify-content: center;
+ }
+  header figure{
+    display: none;
+  }
+
+  header h1{
+    display: none;
+  }
+
+  #cabezalPersona ul{
+width: 100%;
+  }
+#cabezalPersona ul li a{
+ 
+  width: 50%;
+}
+
+  .fondoBlureado{
+    width: 80%;
+  }
+}

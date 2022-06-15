@@ -5,7 +5,7 @@
   <link rel="icon" href="data:,">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ejercicio integrador</title>
+  <title>OBLIGATORIO P1</title>
   <link rel="stylesheet" href="css/estilosLeo.css">
 </head>
 
@@ -111,7 +111,7 @@
 
   <!-- LOGIN -->
   <!-- ------------------------------------------------------- -->
-      <div id="divLogin">
+      <div id="divLogin" class="fondoBlureado">
         <h3>Ingreso</h3>
         <label for="txtLoginUsuario">Usuario:</label>
         <input id="txtLoginUsuario" type="text">
@@ -126,7 +126,7 @@
 
 <!-- REGISTRO -->
     <!-- ------------------------------------------------------- -->
-      <div id="divRegistro">
+      <div id="divRegistro" class="fondoBlureado">
         <h3>Registro</h3>
         <label for="txtRegistroUsuario">Usuario:</label>
         <input id="txtRegistroUsuario" type="text">
@@ -151,8 +151,24 @@
     <!-- ------------------------------------------------------- -->
 
 
-    <div id="realizarReserva">
-      <label for="localAReservar">Local:</label>
+    <div id="realizarReserva" class="fondoBlureado">
+
+      <table>
+        <thead>
+          <tr>
+            <th>Foto</th>
+            <th>Local</th>
+            <th>Tipo de local</th>
+            <th>Disponibilidad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="bodyTablaReservar">
+        </tbody>
+      </table>
+
+      
+      <!-- <label for="localAReservar">Local:</label>
       <select name="localAReservar" id="localAReservar">
           <option selected value="1">Local 1</option>
           <option value="2">Local 2</option>
@@ -164,8 +180,12 @@
   <br>
   <br>
   <input type="button" id="btnRealizarReserva" value="Reservar">
-  <hr>
+  <hr> -->
   </div>
+
+  <div id="verDatosLocalAReservar" class="fondoBlureado">
+    
+    </div>
 
     
 <!-- ESTADISTICAS -->
@@ -174,7 +194,7 @@
   <div id="infoEstadistica">
     <!-- INFORMACION DE LOCAL -->
   <!-- ------------------------------------------------------- -->
-            <div id="infoEstadisticaLocal">
+            <div id="infoEstadisticaLocal"  class="fondoBlureado">
                 <h3>Local</h3>
                 <p id="pPorcentajeDeOcpacion">Ocupación 20%</p>
     
@@ -195,7 +215,7 @@
                 
     <!-- INFORMACION PERSONA -->
    <!-- ------------------------------------------------------- --> 
-                <div id="infoEstadisticaPersona">
+                <div id="infoEstadisticaPersona" class="fondoBlureado">
                     <h3>Persona</h3>
                     <h4>Listado de locales con reservas completadas.</h4>
                     <ul id="ulListadoDeReservasCompletadas">
@@ -217,7 +237,7 @@
       </div>
               <!-- Reservas Pendientes -->
     <!-- ------------------------------------------------------- -->
-<div id="reservasPendientes">
+<div id="reservasPendientes" class="fondoBlureado">
 
   <table>
     <thead>
@@ -265,7 +285,7 @@ local 4 / 7 cupos  <a href="#">Ver</a>
 
       <!-- calificar RESERVA FINALIZADA -->
   <!-- ------------------------------------------------------- -->
-    <div id="reservasFinalizadas">
+    <div id="reservasFinalizadas" >
     
     <br>
     <table>
@@ -318,26 +338,34 @@ local 4 / 7 cupos  <a href="#">Ver</a>
 
     <!-- ADMINISTRAR LOCAL -->
      <!-- ------------------------------------------------------- -->
-    <div id="administrarLocal">
-      <label for="habilitarDisponibilidad">Habilitar disponibilidad:</label>
-      <br>
-      <br>
-      <select name="habilitarDisponibilidad" id="habilitarDisponibilidad">
-          <option selected value="Habilitado">Habilitado</option>
-          <option value="Deshabilitado">Deshabilitado</option>
-      </select>
-      <hr>
-      <label for="txtCupoMaximo">Modificar cupo maximo:</label>
-      <br>
-      <br>
-        <input id="txtCupoMaximo" type="number">
-  <hr>
-  </div>
+    
+        <div id="administrarLocal" class="fondoBlureado">
+          <hr>
+          <label for="habilitarDisponibilidad">Habilitar disponibilidad:</label>
+          <br>
+          <br>
+          <select name="habilitarDisponibilidad" id="habilitarDisponibilidad">
+              <!-- <option selected value="Habilitado">Habilitado</option>
+              <option value="Deshabilitado">Deshabilitado</option> -->
+          </select>
+
+          <p id="pMensajeHabilitarLocal"></p>
+
+          <hr>
+          <label for="txtCupoMaximo">Modificar cupo maximo:</label>
+          <br>
+          <br>
+            <input id="txtCupoMaximo" type="number">
+            <input type="button" value="Modificar" id="btnModificarCupoMaximo">
+            <p id="pMensajeModificarCupoMaximo"></p>
+            <hr>
+      </div>
+    
    
          <!-- CAMBIAR ESTADO DE RESERVA -->
     <!-- ------------------------------------------------------- -->
 
-<div id="adminReserva">
+<div id="adminReserva" class="fondoBlureado">
 
   <div id="buscadorReservasPendientesLocal">
     <label for="buscadorDeReservas">Buscar una Reserva:</label>

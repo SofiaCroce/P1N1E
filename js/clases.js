@@ -62,8 +62,12 @@ class UsuarioLocal {
 
   dehabilitarLocal() {
     this.habilitado = false;
-    console.log(this);
     console.log("Deshabilitado");
+  }
+
+  habilitarLocal(){
+    this.habilitado = true;
+    console.log("Habilitado");
   }
 
   modificarCupoMaximo(nuevoCupoMaximo){

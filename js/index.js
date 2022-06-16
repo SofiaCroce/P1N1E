@@ -416,6 +416,50 @@ function vaciarCampos() {
 //             Funciones Globales
 // -------------------------------------------------
 
+function cuposDisponibles(pIdDeLocal){
+    let cuposMaximo = 0;
+    let cuposUsados = 0;
+    for (let i = 0; i < usuariosLocal.length; i++) {
+        if(usuariosLocal[i].id == pIdDeLocal){
+            cuposMaximo = usuariosLocal[i].cupoMaximo ;
+        }
+    }
+
+    for (let i = 0; i < reservas.length; i++) {
+       if(reservas[i].localID == pIdDeLocal && reservas[i].estado == 1){
+           cuposUsados += reservas[i].cupos;
+       }
+    }
+
+    return cuposMaximo - cuposUsados ;
+}
+
+function buscarLocalPorID(id){
+    // si no encuentra devuelvo null
+    let local = null;
+    // recorro el arreglo de locales
+    for (let i = 0; i < usuariosLocal.length; i++) {
+        // si el id por parametro es igual al id del local de la iteracion 
+        if(id ==usuariosLocal[i].id){
+            // guardo el objeto local en la variable local
+            local = usuariosLocal[i];
+        } 
+    }
+    // devuevlo el local
+    return local;
+}
+
+
+function obtenerTipoDeLocalPorId(idTipo) {
+    let tipo = "";
+    for (let i = 0; i < tiposDeLocal.length; i++) {
+        if (tiposDeLocal[i].id == idTipo) {
+            tipo = tiposDeLocal[i].nombre;
+        } 
+    }
+    return tipo;
+   } 
+
 function buscarUsuarioPorNombre(arreglo, nombreUsuario) {
     let resultado = null;
     let i = 0;
@@ -621,6 +665,72 @@ else {
 // -------------------------------------------------
 //             Funciones de Persona
 // -------------------------------------------------
+function verificarSiExisteReservaDeUsuarioEnLocal(pIdUsuario,pIdLocal){
+    let tieneReservasHechas = false;
+    for (let i = 0; i < reservas.length; i++) {
+        if(pIdUsuario == reservas[i].usuarioID && pIdLocal == reservas[i].localID && reservas[i].estado == 1){
+            tieneReservasHechas = true;
+        }
+        
+    }
+    return tieneReservasHechas;
+}
+
+function btnReservarEnLocalHandler(){
+let mensaje = "";
+let cuposParaReservar = document.querySelector('#txtReservarEnLocal').value;
+let data = this.getAttribute('data-usuario');
+
+if(cuposParaReservar != ''){
+    if(!isNaN(cuposParaReservar)){
+        let cuposParaReservarInt = parseInt(cuposParaReservar);
+        if(cuposParaReservarInt>0){
+            if(!isNaN(data) && data != ''){
+                let dataInt = parseInt(data);
+
+                let cuposDisponiblesActuales = cuposDisponibles(dataInt);
+                
+                if(cuposDisponiblesActuales>=cuposParaReservarInt){
+                    if(!verificarSiExisteReservaDeUsuarioEnLocal(usuarioLogueado.id,dataInt)){
+
+                        reservas.push(new Reserva(usuarioLogueado.id,dataInt,cuposParaReservarInt));
+                        console.log('reservado');
+                        mensaje = "Reserva realizada con exito.";
+    
+                        if(cuposDisponiblesActuales==cuposParaReservarInt){
+                            buscarLocalPorID(dataInt).dehabilitarLocal();
+                            mensaje += "Se ha alcanzado el cupo maximo del local, el mismo se deshabilitara.";
+                        }
+                        let boton = document.querySelector('#btnReservarEnLocal');
+                        boton.disabled = true;
+    
+                    }else{
+                        console.error('Ya realizo reservas en ese local');
+                    }
+                    
+                }else{
+                    mensaje =  'Los cupos seleccionados superan la disponibilidad del local. Cupos disponibles: '+ cuposDisponiblesActuales+ ".";
+                }
+
+            }else{
+                console.error("Error en la data-usuario del input");
+            }
+
+        }else{
+            mensaje = 'Debe ingresar un cupo mayor o igual a 1.'; 
+        }
+    }else{
+        mensaje = 'Debe ingresar un numero en el campo de cupos.';
+    }
+    
+}else{
+    mensaje = 'El campo de cupos no debe estar vacio.';
+}
+document.querySelector('#pMensajeReservarEnLocal').innerHTML = mensaje;
+}
+
+
+
 function generarTablaReservas(){
         
         let bodyHTML = '';
@@ -653,7 +763,7 @@ function generarTablaReservas(){
                                             bodyHTML += `
                                             <tr>
                                                 <td>
-                                                    ${localActual.foto}
+                                                <img  src="./img/${localActual.foto}" alt="foto del local">
                                                 </td>
                                                 <td>
                                                     ${localActual.nombre}
@@ -698,8 +808,8 @@ function btnVerDatosLocalHandler(){
     document.querySelector('#verDatosLocalAReservar').style.display = 'Block';
 }
 
-function generarDivVerDatosLocalAReservar(id){
-let localAMostrar = buscarLocalPorID(id);
+function generarDivVerDatosLocalAReservar(idLocal){
+let localAMostrar = buscarLocalPorID(idLocal);
 let bodyHtml = ""
 if(localAMostrar != null){
     bodyHtml += `
@@ -726,23 +836,22 @@ if(localAMostrar != null){
     <br>
     <br>
       <input id="txtReservarEnLocal" type="number">
-      <input type="button" value="Reservar" id="btnReservarEnLocal">
+      <input data-usuario="${idLocal}" type="button" value="Reservar" id="btnReservarEnLocal">
       <p id="pMensajeReservarEnLocal"></p>
    
     `
 }
+
+
+
    document.querySelector('#verDatosLocalAReservar').innerHTML = bodyHtml;
+
+   if(bodyHtml != ""){
+    document.querySelector('#btnReservarEnLocal').addEventListener('click',btnReservarEnLocalHandler);
+}
 }
 
-   function obtenerTipoDeLocalPorId(idTipo) {
-    let tipo = "";
-    for (let i = 0; i < tiposDeLocal.length; i++) {
-        if (tiposDeLocal[i].id == idTipo) {
-            tipo = tiposDeLocal[i].nombre;
-        } 
-    }
-    return tipo;
-   } 
+  
 
 
 function usuarioLogueadoTieneReservasPendientesEnLocal(localID){
@@ -1109,20 +1218,7 @@ function buscarReservaPorID(id){
 // funciones para local
 
 // buscar local por id
-function buscarLocalPorID(id){
-    // si no encuentra devuelvo null
-    let local = null;
-    // recorro el arreglo de locales
-    for (let i = 0; i < usuariosLocal.length; i++) {
-        // si el id por parametro es igual al id del local de la iteracion 
-        if(id ==usuariosLocal[i].id){
-            // guardo el objeto local en la variable local
-            local = usuariosLocal[i];
-        } 
-    }
-    // devuevlo el local
-    return local;
-}
+
 
 
 
@@ -1164,7 +1260,7 @@ function completarTablaReservasSegunEstadoYUsuario(pEstado, pTipoUsuario){
                     bodyHTML += `
                     <tr>
                         <td>
-                        <img src="./img/logo.jpg" alt="logo">
+                        <img id="imgAReservar" width="300px" src="./img/${buscarLocalPorID(reservaActual.localID).foto}" alt="foto del local">
                         </td>
                         <td>
                             ${buscarLocalPorID(reservaActual.localID).nombre}
@@ -1191,7 +1287,7 @@ function completarTablaReservasSegunEstadoYUsuario(pEstado, pTipoUsuario){
                                     bodyHTML += `
                                     <tr>
                                         <td>
-                                            <img src="./img/logo.jpg" alt="logo">
+                                        <img id="imgAReservar" width="300px" src="./img/${buscarLocalPorID(reservaActual.localID).foto}" alt="foto del local">
                                         </td>
                                         <td>
                                             ${buscarLocalPorID(reservaActual.localID).nombre}

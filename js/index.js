@@ -212,11 +212,11 @@ function btnMenuLoginHandler() {
     mostrarLogin();
     // usuario harcodeado
     // local
-    document.querySelector('#txtLoginUsuario').value = "Usuario1"
-    document.querySelector('#txtLoginPassword').value = "Paponita123"
+    //document.querySelector('#txtLoginUsuario').value = "Usuario1"
+    //document.querySelector('#txtLoginPassword').value = "Paponita123"
     //  persona
-    //document.querySelector('#txtLoginUsuario').value = "Usuario"
-    //document.querySelector('#txtLoginPassword').value = "Juan1234"
+    document.querySelector('#txtLoginUsuario').value = "Usuario8"
+    document.querySelector('#txtLoginPassword').value = "Juan1234"
 }
 
 function btnMenuHomeHandler() {
@@ -290,7 +290,7 @@ function btnEstadisticasPersonaMenuHandler() {
     document.querySelector("#cabezalPersona").style.display = "block";
     document.querySelector("#infoEstadistica").style.display = "block";
     document.querySelector("#infoEstadisticaPersona").style.display = "block";
-    listadoDePromedioDeCalificacionesDeLocales();
+    mostrarListadoDeLocalesConReservasHechas();
 }
 // Reservar
 function btnReservarPersonaMenuHandler() {
@@ -336,7 +336,7 @@ function btnEstadisticasLocalMenuHandler() {
     porcentajeDeOcupacionEnUnLocal();
     mostrarPromedioLocalLogueado(usuarioLogueado.id);
     mostrarListadoDePromedioDeCalificacionesDeLocales();
-    mostrarTotalDeReservasRealizadasEnUnLocal();
+    mostrarTotalDeReservasRealizadasEnElLocal();
 
 }
 function btnAdministrarReservasLocalMenuHandler() {
@@ -1044,18 +1044,22 @@ function mostrarListadoDePromedioDeCalificacionesDeLocales() {
     document.querySelector("#ulListadoDeCalificaciones").innerHTML = listadoHTML;
 }
 
-function mostrarTotalDeReservasRealizadasEnUnLocal() {
+//funcion que muestra los totales de reservas para el local logueado
+function mostrarTotalDeReservasRealizadasEnElLocal() {
     let reservasPendientes = 0;
     let cantidadReservasFinalizadas = 0;
 
     for (let i = 0; i < reservas.length; i++) {
+        //estado == 1 son las reservas Pendientes
         if (reservas[i].localID == usuarioLogueado.id && reservas[i].estado == 1) {
             reservasPendientes++;
         }
+        //estado == 2 son las reservas finalizadas
         if (reservas[i].localID == usuarioLogueado.id && reservas[i].estado == 2) {
             cantidadReservasFinalizadas++;
         }
     }
+    //mostrar en el div la informacion de las reservas
     document.querySelector("#divTotalesDeReservas").innerHTML =
         `<p>Total de reservas: ${reservasPendientes + cantidadReservasFinalizadas}</p>
         <p>Total de pendientes: ${reservasPendientes}</p>
@@ -1067,33 +1071,68 @@ function mostrarTotalDeReservasRealizadasEnUnLocal() {
 //            Funciones de Estadisticas Persona
 // -------------------------------------------------
 
+//funcion para contar todas las reservas que no esten canceladas, en un determinado local
 function calcularTotalDeReservasEnUnLocal(idUsuarioLocal) {
-    //funcion para calcular todas las reservas en cualquier estado, en un mismo local
-    let reservaHecha = 0;
+    let reservasHechas = 0;
     for (let i = 0; i < reservas.length; i++) {
         const reservaActual = reservas[i];
-        if (reservaActual.localID == idUsuarioLocal && reservaActual.localID != null) {
-            reservaHecha++
+        if (reservaActual.localID == idUsuarioLocal && reservaActual.localID != null && reservaActual.estado != 3) {
+            reservasHechas++
         }
     }
-    console.log('El local con ID# ' + idUsuarioLocal + ' tiene un total de ' + reservaHecha + ' reserva(s) hechas.');
-    //como validar si el param idUsuarioLocal no existe como id valido de usuarios local? referencia cruzada
+    return reservasHechas;
 }
 
-function calcularTotalDeReservasFinalizadasDeUnaPersona(idUsuario) {
-    //funcion para calcular el total de las reservas finalizadas para un usuario persona en particular
-    let reservaFinalizada = 0;
+//funcion que devuelve el total de las reservas finalizadas y pendientes para el usuario persona logueado, en un determinado local
+function calcularTotalDeReservasDeUnaPersonaEnUnLocal(pIdUsuarioLocal) {
+    let reservasHechas = 0;
     for (let i = 0; i < reservas.length; i++) {
         const reservaActual = reservas[i];
-        if (reservaActual.usuarioID == idUsuario && reservaActual.usuarioID != null && reservaActual.estado == 2) {
-            reservaFinalizada++
+        if (reservaActual.usuarioID == usuarioLogueado.id && usuarioLogueado.tipoUsuarioId == 2 && reservaActual.localID == pIdUsuarioLocal && reservaActual.usuarioID != null && reservaActual.estado != 3) {
+            reservasHechas++
         }
     }
-    console.log('La Persona con ID# ' + idUsuario + ' tiene un total de ' + reservaFinalizada + ' reserva(s) finalizadas.');
-    //como validar si el param idUsuario no existe como id valido de usuarios Persona? referencia cruzada
+    return reservasHechas;
 }
 
-function porcentajeDeReservas() {
+function mostrarListadoDeLocalesConReservasHechas() {
+    let bodyHTML = '';
+    let localesConMasReservas = [];
+    let primerIngreso = 0;
+    
+    for (let i = 0; i < usuariosLocal.length; i++) {
+        let cantidadDeReservasHechasDelUsuario = calcularTotalDeReservasDeUnaPersonaEnUnLocal(usuariosLocal[i].id);
+        let totalDeReservasDelLocal = calcularTotalDeReservasEnUnLocal(usuariosLocal[i].id);
+
+
+        if (cantidadDeReservasHechasDelUsuario > 0) {
+            let porcentaje = 0;
+            if(totalDeReservasDelLocal > 0){
+                porcentaje = Math.round(cantidadDeReservasHechasDelUsuario * 100 / totalDeReservasDelLocal);
+            }
+            //solo si existe un elemento en el arreglo, entra a la condicion
+            if (localesConMasReservas.length > 0) {
+                if (calcularTotalDeReservasDeUnaPersonaEnUnLocal(localesConMasReservas[0]) == cantidadDeReservasHechasDelUsuario) {
+                    localesConMasReservas.push(usuariosLocal[i].id);
+                } else if(calcularTotalDeReservasDeUnaPersonaEnUnLocal(localesConMasReservas[0]) < cantidadDeReservasHechasDelUsuario){
+                    localesConMasReservas = [];
+                    localesConMasReservas.push(usuariosLocal[i].id);
+                }
+            } else if (primerIngreso == 0){ 
+                localesConMasReservas.push(usuariosLocal[i].id); 
+                primerIngreso++;}
+
+            
+            bodyHTML += `<li> ${usuariosLocal[i].nombre}  || ${cantidadDeReservasHechasDelUsuario} reservas hechas || Reservas totales del local : ${totalDeReservasDelLocal} || ${porcentaje}  % de resevas hechas por el usuario</li>`;
+
+
+        }
+
+
+    }
+
+document.querySelector("#ulListadoDeReservasCompletadas").innerHTML = bodyHTML;
+console.table(localesConMasReservas);
 
 }
 

@@ -212,11 +212,11 @@ function btnMenuLoginHandler() {
     mostrarLogin();
     // usuario harcodeado
     // local
-    // document.querySelector('#txtLoginUsuario').value = "Usuario1"
-    // document.querySelector('#txtLoginPassword').value = "Paponita123"
+    document.querySelector('#txtLoginUsuario').value = "Usuario1"
+    document.querySelector('#txtLoginPassword').value = "Paponita123"
     //  persona
-    document.querySelector('#txtLoginUsuario').value = "Usuario8"
-    document.querySelector('#txtLoginPassword').value = "Juan1234"
+    //document.querySelector('#txtLoginUsuario').value = "Usuario"
+    //document.querySelector('#txtLoginPassword').value = "Juan1234"
 }
 
 function btnMenuHomeHandler() {
@@ -333,6 +333,11 @@ function btnEstadisticasLocalMenuHandler() {
     document.querySelector("#cabezalLocal").style.display = "block";
     document.querySelector("#infoEstadistica").style.display = "block";
     document.querySelector("#infoEstadisticaLocal").style.display = "block";
+    porcentajeDeOcupacionEnUnLocal();
+    mostrarPromedioLocalLogueado(usuarioLogueado.id);
+    mostrarListadoDePromedioDeCalificacionesDeLocales();
+    mostrarTotalDeReservasRealizadasEnUnLocal();
+
 }
 function btnAdministrarReservasLocalMenuHandler() {
     ocultarPantallas();
@@ -972,25 +977,29 @@ function btnModificarCupoMaximoHandler() {
 //            Funciones de Estadisticas Locales
 // -------------------------------------------------
 
-function porcentajeDeOcupacionEnUnLocal(idUsuarioLocal) {
+//esta funcion calcula el porcentaje de ocupacion en un local en base a las reservas pendientes
+function porcentajeDeOcupacionEnUnLocal() {
     //reutilizamos la funcion que devuelve los cupos disponibles
     let mensaje = '';
-    let cuposDisponiblesActuales = cuposDisponibles(idUsuarioLocal);
+    let cuposDisponiblesActuales = cuposDisponibles(usuarioLogueado.id);
     let cuposMaximosActuales = usuarioLogueado.cupoMaximo;
     let reservasPendientes = cuposMaximosActuales - cuposDisponiblesActuales;
 
-    if (usuarioLogueado.id == idUsuarioLocal && cuposMaximosActuales > 0) {
-        let porcentajeOcupado = reservasPendientes * 100 / cuposMaximosActuales;
+    if (usuarioLogueado.tipoUsuarioId == 1 && cuposMaximosActuales > 0) {
+        //redondeamos hacia el numero entero mas cercano
+        let porcentajeOcupado = Math.round(reservasPendientes * 100 / cuposMaximosActuales);
         mensaje = 'El porcentaje de ocupación del local es: ' + porcentajeOcupado + '%';
-    } else { console.error('El usuario logeado es invalido'); }
+    } else { mensaje = 'El usuario logeado es invalido'; }
     //regla de tres para calcular el porcentaje de ocupacion
-    console.log(mensaje);
+
+    document.querySelector("#pPorcentajeDeOcpacion").innerHTML = mensaje;
 }
 
+//esta funcion hace un promedio de calificaciones solo para reservas finalizadas con calificacion hecha
 function promedioDeCalificacionesEnUnLocal(idUsuarioLocal) {
     let contadorCalificacionesValidas = 0;
     let sumaTotalDeCalificaciones = 0;
-    let mensaje = "";
+    let promedio = 0;
     for (let i = 0; i < reservas.length; i++) {
         //recorrer listado de reservas con estado finalizado que coincida con el id del usuario Local
         if (reservas[i].localID == idUsuarioLocal && reservas[i].estado == 2 && reservas[i].calificacion > 0) {
@@ -998,55 +1007,60 @@ function promedioDeCalificacionesEnUnLocal(idUsuarioLocal) {
             contadorCalificacionesValidas++;
             //ir sumando en cada iteracion las calificaciones
             sumaTotalDeCalificaciones = sumaTotalDeCalificaciones + reservas[i].calificacion;
-        } else if (contadorCalificacionesValidas > 0) {
-            //calculo el promedio solo si existen calificaciones validas
-            let promedio = sumaTotalDeCalificaciones / contadorCalificacionesValidas;
-            mensaje = "Promedio de Calificaciones: " + promedio;
-        } else { mensaje = "Este local no cuenta con reservas finalizadas calificadas por clientes."; }
-    }
-    console.log(mensaje);
-    return mensaje;
-}
-
-function listadoDePromedioDeCalificacionesDeLocales() {
-    let listadoHTML = '';
-    //let contenedorDeListado = ;
-    for (let i = 0; i < reservas.length; i++) {
-        const reserva = reservas[i];
-
-        listadoHTML += `<li>'${promedioDeCalificacionesEnUnLocal(reserva.localID)}'<li/>`;
-        console.log(reserva.localID);
-    }
-    //referencias cruzadas? precisamos el nombre del local pero esta funcion recorre el listado de reservas, no puedo acceder al nombre del local?
-    document.querySelector("#ulListadoDeCalificaciones").innerHTML = listadoHTML;
-    console.log(listadoHTML);
-}
-
-function verTotalDeReservasRealizadasEnUnLocal(idUsuarioLocal) {
-
-    let mensaje = '';
-    let cuposDisponiblesActuales = cuposDisponibles(idUsuarioLocal);
-    let cuposMaximosActuales = usuarioLogueado.cupoMaximo;
-    let reservasPendientes = cuposMaximosActuales - cuposDisponiblesActuales;
-    let cantidadReservasFinalizadas = 0;
-    let totalReservas = 0;
-
-
-    if (usuarioLogueado.id == idUsuarioLocal) {
-        //mostrar cantiadd de reservas pendientes
-        mensaje = 'El total de reservas pendientes es: ' + reservasPendientes;
-        //mostrar cantidad de reservas finalizadas
-        for (let i = 0; i < reservas.length; i++) {
-            if (reservas[i].localID == idUsuarioLocal && reservas[i].estado == 2) {
-                cantidadReservasFinalizadas++
-            }
         }
-        totalReservas = reservasPendientes + cantidadReservasFinalizadas;
-    } else { mensaje = 'El usuario no es valido.' }
+    }
+    if (contadorCalificacionesValidas > 0) {
+        //calculo el promedio solo si existen calificaciones validas
+        promedio = sumaTotalDeCalificaciones / contadorCalificacionesValidas;
+    }
+    return promedio;
+}
 
-    mensaje += '. El total de reservas finalizadas es: ' + cantidadReservasFinalizadas;
-    mensaje += '. El total de las reservas es: ' + totalReservas;
-    console.log(mensaje);
+//funcion para mostrar en Estadisticas del local logueado el promedio de calificaciones
+function mostrarPromedioLocalLogueado(idUsuarioLocal) {
+    let promedio = promedioDeCalificacionesEnUnLocal(idUsuarioLocal);
+    let mensaje = 'Calificación del local :';
+
+    if (promedio == 0) {
+        mensaje += ' Sin calificaciones.'
+    } else {
+        mensaje += ' ' + promedio + '%';
+    }
+
+    document.querySelector("#pPromedioDeCalificacion").innerHTML = mensaje;
+}
+
+//funcion para mostrar el listado de todos los locales y el promedio correspondiente
+function mostrarListadoDePromedioDeCalificacionesDeLocales() {
+    let listadoHTML = '';
+    for (let i = 0; i < usuariosLocal.length; i++) {
+        let promedio = promedioDeCalificacionesEnUnLocal(usuariosLocal[i].id);
+        let mensajePromedio = 'Sin calificaciones';
+        if (promedio != 0) {
+            mensajePromedio = promedio;
+        }
+        listadoHTML += `<li>Local: ${usuariosLocal[i].nombre} || Calificación: ${mensajePromedio}</li>`;
+    }
+    document.querySelector("#ulListadoDeCalificaciones").innerHTML = listadoHTML;
+}
+
+function mostrarTotalDeReservasRealizadasEnUnLocal() {
+    let reservasPendientes = 0;
+    let cantidadReservasFinalizadas = 0;
+
+    for (let i = 0; i < reservas.length; i++) {
+        if (reservas[i].localID == usuarioLogueado.id && reservas[i].estado == 1) {
+            reservasPendientes++;
+        }
+        if (reservas[i].localID == usuarioLogueado.id && reservas[i].estado == 2) {
+            cantidadReservasFinalizadas++;
+        }
+    }
+    document.querySelector("#divTotalesDeReservas").innerHTML =
+        `<p>Total de reservas: ${reservasPendientes + cantidadReservasFinalizadas}</p>
+        <p>Total de pendientes: ${reservasPendientes}</p>
+        <p>Total de finalizadas: ${cantidadReservasFinalizadas}</p>`;
+
 }
 
 // -------------------------------------------------
@@ -1077,6 +1091,10 @@ function calcularTotalDeReservasFinalizadasDeUnaPersona(idUsuario) {
     }
     console.log('La Persona con ID# ' + idUsuario + ' tiene un total de ' + reservaFinalizada + ' reserva(s) finalizadas.');
     //como validar si el param idUsuario no existe como id valido de usuarios Persona? referencia cruzada
+}
+
+function porcentajeDeReservas() {
+
 }
 
 // -------------------------------------------------

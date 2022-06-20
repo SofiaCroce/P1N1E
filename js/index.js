@@ -4,7 +4,6 @@
 
 let tipoDeUsuarioLogueado = 1;
 let usuarioEstaLogueado = false;
-
 let usuarioLogueado = {};
 
 let tiposDeUsuarioPrecarga = [];
@@ -32,12 +31,14 @@ let reservas = [];
 inicializar();
 
 function inicializar() {
+
   mostrarHome();
 
   // actualizarMenuPorTipoDeUsuario();
   cargarClickEnBotones();
   cargarEventosEnSelect();
   precargarDatos();
+
 }
 
 // -------------------------------------------------
@@ -55,9 +56,11 @@ function precargarDatos() {
 // -------------------------------------------------
 
 function precargaDeOpciones() {
+
   precargarTiposDeUsuarios();
   precargarTipoLocal();
   precargarTipoEstadoDeReserva();
+
 }
 
 //              Carga de tipos de usuarios
@@ -808,7 +811,6 @@ for (let o = 0; o < 3; o++) {
         mensaje = "Los datos de usuario Persona no pueden ser nulos o indefinidos (nombre de usuario, password, nombre)";
     }
 
-
      //si el mensaje es diferente a vacio largo el console warm con dicho mensaje
      if (mensaje != "") {
         console.warn(mensaje);
@@ -1182,17 +1184,18 @@ function mostrarPantallaPersonaLogueada() {
 // -------------------------------
 // Estadistica
 function btnEstadisticasPersonaMenuHandler() {
-  ocultarPantallas();
-  document.querySelector("#cabezalPersona").style.display = "block";
-  document.querySelector("#infoEstadistica").style.display = "block";
-  document.querySelector("#infoEstadisticaPersona").style.display = "block";
+    ocultarPantallas();
+    document.querySelector("#cabezalPersona").style.display = "block";
+    document.querySelector("#infoEstadistica").style.display = "block";
+    document.querySelector("#infoEstadisticaPersona").style.display = "block";
+    mostrarListadoDeLocalesConReservasHechas();
 }
 // Reservar
 function btnReservarPersonaMenuHandler() {
-  ocultarPantallas();
-  generarTablaReservas();
-  document.querySelector("#cabezalPersona").style.display = "block";
-  document.querySelector("#realizarReserva").style.display = "block";
+    ocultarPantallas();
+    generarTablaReservas();
+    document.querySelector("#cabezalPersona").style.display = "block";
+    document.querySelector("#realizarReserva").style.display = "block";
 }
 // reservas pendientes
 
@@ -1219,24 +1222,29 @@ function btnReservasFinalizadasPersonaMenuHandler() {
 // -------------------------------
 
 function btnEstadisticasLocalMenuHandler() {
-  ocultarPantallas();
-  document.querySelector("#cabezalLocal").style.display = "block";
-  document.querySelector("#infoEstadistica").style.display = "block";
-  document.querySelector("#infoEstadisticaLocal").style.display = "block";
+    ocultarPantallas();
+    document.querySelector("#cabezalLocal").style.display = "block";
+    document.querySelector("#infoEstadistica").style.display = "block";
+    document.querySelector("#infoEstadisticaLocal").style.display = "block";
+    porcentajeDeOcupacionEnUnLocal();
+    mostrarPromedioLocalLogueado(usuarioLogueado.id);
+    mostrarListadoDePromedioDeCalificacionesDeLocales();
+    mostrarTotalDeReservasRealizadasEnElLocal();
+
 }
 function btnAdministrarReservasLocalMenuHandler() {
-  ocultarPantallas();
-  completarTablaReservasSegunEstadoYUsuario(1, usuarioLogueado.tipoUsuarioId);
-  // console.log(usuarioLogueado.tipoUsuarioId);
-  document.querySelector("#cabezalLocal").style.display = "block";
-  document.querySelector("#adminReserva").style.display = "block";
+    ocultarPantallas();
+    completarTablaReservasSegunEstadoYUsuario(1, usuarioLogueado.tipoUsuarioId);
+    // console.log(usuarioLogueado.tipoUsuarioId);
+    document.querySelector("#cabezalLocal").style.display = "block";
+    document.querySelector("#adminReserva").style.display = "block";
+
 }
 function btnAdministrarLocalMenuHandler() {
-  ocultarPantallas();
+    ocultarPantallas();
 
   document.querySelector("#cabezalLocal").style.display = "block";
   document.querySelector("#administrarLocal").style.display = "block";
-
   document.querySelector("#txtCupoMaximo").value = usuarioLogueado.cupoMaximo;
 }
 // ---------------------------------------------------------------------------
@@ -1309,13 +1317,11 @@ function cuposDisponibles(pIdDeLocal) {
       cuposMaximo = usuariosLocal[i].cupoMaximo;
     }
   }
-
   for (let i = 0; i < reservas.length; i++) {
     if (reservas[i].localID == pIdDeLocal && reservas[i].estado == 1) {
       cuposUsados += reservas[i].cupos;
     }
   }
-
   return cuposMaximo - cuposUsados;
 }
 
@@ -1335,6 +1341,7 @@ function buscarLocalPorID(id) {
 }
 
 function obtenerTipoDeLocalPorId(idTipo) {
+
   let tipo = "";
   for (let i = 0; i < tiposDeLocal.length; i++) {
     if (tiposDeLocal[i].id == idTipo) {
@@ -1353,6 +1360,7 @@ function buscarUsuarioPorNombre(arreglo, nombreUsuario) {
       usuarioActual.nombreUsuario.toLowerCase() == nombreUsuario.toLowerCase()
     ) {
       resultado = usuarioActual;
+
     }
     i++;
   }
@@ -1375,14 +1383,17 @@ function buscarUsuarioPorID(arreglo, idUsuario) {
 }
 
 function validarNombre(nombre) {
+
   let tieneAlMenosDosCaracteres = nombre.length >= 2;
   let tieneNumeros = false;
 
   for (let i = 0; i < nombre.length; i++) {
     if (!isNaN(nombre[i]) && nombre[i] != '') {
       tieneNumeros = true;
+
     }
   }
+
 
   if (tieneAlMenosDosCaracteres && !tieneNumeros) {
     return true;
@@ -1426,12 +1437,14 @@ function validarPassword(pass) {
   }
 }
 
+
 // -------------------------------------------------
 //             Registro de Usuario Persona
 // -------------------------------------------------
 
 // funcion del evento del boton para registrar un usuario Persona
 function btnRegistrarseHandler() {
+
   let mensaje = "";
   let mensajePassword =
     "La contraseña deberá tener al menos 6 caracteres, una mayúscula, una minúscula y un número";
@@ -1463,6 +1476,7 @@ function btnRegistrarseHandler() {
         } else {
           mensaje =
             "El Nombre debe tener al menos dos letras y no contener números.";
+
         }
       } else {
         mensaje = mensajePassword + ", (" + retorno.msj + ")";
@@ -1471,9 +1485,11 @@ function btnRegistrarseHandler() {
       //si hay coincidencia de nombre de usuario local o persona, se muestra el mensaje
       mensaje = "El usuario ya existe";
     }
+
   } else {
     mensaje = "Todos los campos son obligatorios.";
   }
+
 
   document.querySelector("#divRegistroMensajes").innerHTML = mensaje;
 }
@@ -1483,6 +1499,7 @@ function btnRegistrarseHandler() {
 // -------------------------------------------------
 
 function registrarUsuarioPersona(usuario, password, nombre) {
+
   //creando una nueva instancia de la clase UsuarioPersona
   let nuevoUsuario = new UsuarioPersona(usuario, password, nombre);
   usuariosPersona.push(nuevoUsuario);
@@ -1506,6 +1523,7 @@ function existeUsuario(nombreUsuario) {
     retorno = true;
   }
   return retorno;
+
 }
 
 // -------------------------------------------------
@@ -1513,6 +1531,7 @@ function existeUsuario(nombreUsuario) {
 // -------------------------------------------------
 
 function btnLoginIngresarHandler() {
+
   // console.log('prueba');
   let mensaje = "";
 
@@ -1558,6 +1577,7 @@ function btnLoginIngresarHandler() {
     mensaje = "Todos los datos son obligatorios.";
   }
 
+
   document.querySelector("#divLoginMensajes").innerHTML = mensaje;
 }
 
@@ -1565,6 +1585,7 @@ function btnLoginIngresarHandler() {
 //             Funciones de Persona
 // -------------------------------------------------
 function verificarSiExisteReservaDeUsuarioEnLocal(pIdUsuario, pIdLocal) {
+
   let tieneReservasHechas = false;
   for (let i = 0; i < reservas.length; i++) {
     if (
@@ -1573,6 +1594,7 @@ function verificarSiExisteReservaDeUsuarioEnLocal(pIdUsuario, pIdLocal) {
       reservas[i].estado == 1
     ) {
       tieneReservasHechas = true;
+
     }
   }
   return tieneReservasHechas;
@@ -1653,7 +1675,6 @@ function generarTablaReservas() {
 
     //  si el estado es 1 "pendiente" y el id de usuario de la reserva es igual al id de usario logueado
     //  creo la fila correspondiente en la tabla
-
     if (
       localHabilitado &&
       !usuarioLogueadoTieneReservasPendientesEnLocal(localActual.id)
@@ -1872,7 +1893,170 @@ function btnModificarCupoMaximoHandler() {
 }
 
 // -------------------------------------------------
-//
+//            Funciones de Estadisticas Locales
+// -------------------------------------------------
+
+//esta funcion calcula el porcentaje de ocupacion en un local en base a las reservas pendientes
+function porcentajeDeOcupacionEnUnLocal() {
+    //reutilizamos la funcion que devuelve los cupos disponibles
+    let mensaje = '';
+    let cuposDisponiblesActuales = cuposDisponibles(usuarioLogueado.id);
+    let cuposMaximosActuales = usuarioLogueado.cupoMaximo;
+    let reservasPendientes = cuposMaximosActuales - cuposDisponiblesActuales;
+
+    if (usuarioLogueado.tipoUsuarioId == 1 && cuposMaximosActuales > 0) {
+        //redondeamos hacia el numero entero mas cercano
+        let porcentajeOcupado = Math.round(reservasPendientes * 100 / cuposMaximosActuales);
+        mensaje = 'El porcentaje de ocupación del local es: ' + porcentajeOcupado + '%';
+    } else { mensaje = 'El usuario logeado es invalido'; }
+    //regla de tres para calcular el porcentaje de ocupacion
+
+    document.querySelector("#pPorcentajeDeOcpacion").innerHTML = mensaje;
+}
+
+//esta funcion hace un promedio de calificaciones solo para reservas finalizadas con calificacion hecha
+function promedioDeCalificacionesEnUnLocal(idUsuarioLocal) {
+    let contadorCalificacionesValidas = 0;
+    let sumaTotalDeCalificaciones = 0;
+    let promedio = 0;
+    for (let i = 0; i < reservas.length; i++) {
+        //recorrer listado de reservas con estado finalizado que coincida con el id del usuario Local
+        if (reservas[i].localID == idUsuarioLocal && reservas[i].estado == 2 && reservas[i].calificacion > 0) {
+            //guarda en el contador solo las reservas con calificacion > 0
+            contadorCalificacionesValidas++;
+            //ir sumando en cada iteracion las calificaciones
+            sumaTotalDeCalificaciones = sumaTotalDeCalificaciones + reservas[i].calificacion;
+        }
+    }
+    if (contadorCalificacionesValidas > 0) {
+        //calculo el promedio solo si existen calificaciones validas
+        promedio = sumaTotalDeCalificaciones / contadorCalificacionesValidas;
+    }
+    return promedio;
+}
+
+//funcion para mostrar en Estadisticas del local logueado el promedio de calificaciones
+function mostrarPromedioLocalLogueado(idUsuarioLocal) {
+    let promedio = promedioDeCalificacionesEnUnLocal(idUsuarioLocal);
+    let mensaje = 'Calificación del local :';
+
+    if (promedio == 0) {
+        mensaje += ' Sin calificaciones.'
+    } else {
+        mensaje += ' ' + promedio + '%';
+    }
+
+    document.querySelector("#pPromedioDeCalificacion").innerHTML = mensaje;
+}
+
+//funcion para mostrar el listado de todos los locales y el promedio correspondiente
+function mostrarListadoDePromedioDeCalificacionesDeLocales() {
+    let listadoHTML = '';
+    for (let i = 0; i < usuariosLocal.length; i++) {
+        let promedio = promedioDeCalificacionesEnUnLocal(usuariosLocal[i].id);
+        let mensajePromedio = 'Sin calificaciones';
+        if (promedio != 0) {
+            mensajePromedio = promedio;
+        }
+        listadoHTML += `<li>Local: ${usuariosLocal[i].nombre} || Calificación: ${mensajePromedio}</li>`;
+    }
+    document.querySelector("#ulListadoDeCalificaciones").innerHTML = listadoHTML;
+}
+
+//funcion que muestra los totales de reservas para el local logueado
+function mostrarTotalDeReservasRealizadasEnElLocal() {
+    let reservasPendientes = 0;
+    let cantidadReservasFinalizadas = 0;
+
+    for (let i = 0; i < reservas.length; i++) {
+        //estado == 1 son las reservas Pendientes
+        if (reservas[i].localID == usuarioLogueado.id && reservas[i].estado == 1) {
+            reservasPendientes++;
+        }
+        //estado == 2 son las reservas finalizadas
+        if (reservas[i].localID == usuarioLogueado.id && reservas[i].estado == 2) {
+            cantidadReservasFinalizadas++;
+        }
+    }
+    //mostrar en el div la informacion de las reservas
+    document.querySelector("#divTotalesDeReservas").innerHTML =
+        `<p>Total de reservas: ${reservasPendientes + cantidadReservasFinalizadas}</p>
+        <p>Total de pendientes: ${reservasPendientes}</p>
+        <p>Total de finalizadas: ${cantidadReservasFinalizadas}</p>`;
+
+}
+
+// -------------------------------------------------
+//            Funciones de Estadisticas Persona
+// -------------------------------------------------
+
+//funcion para contar todas las reservas que no esten canceladas, en un determinado local
+function calcularTotalDeReservasEnUnLocal(idUsuarioLocal) {
+    let reservasHechas = 0;
+    for (let i = 0; i < reservas.length; i++) {
+        const reservaActual = reservas[i];
+        if (reservaActual.localID == idUsuarioLocal && reservaActual.localID != null && reservaActual.estado != 3) {
+            reservasHechas++
+        }
+    }
+    return reservasHechas;
+}
+
+//funcion que devuelve el total de las reservas finalizadas y pendientes para el usuario persona logueado, en un determinado local
+function calcularTotalDeReservasDeUnaPersonaEnUnLocal(pIdUsuarioLocal) {
+    let reservasHechas = 0;
+    for (let i = 0; i < reservas.length; i++) {
+        const reservaActual = reservas[i];
+        if (reservaActual.usuarioID == usuarioLogueado.id && usuarioLogueado.tipoUsuarioId == 2 && reservaActual.localID == pIdUsuarioLocal && reservaActual.usuarioID != null && reservaActual.estado != 3) {
+            reservasHechas++
+        }
+    }
+    return reservasHechas;
+}
+
+function mostrarListadoDeLocalesConReservasHechas() {
+    let bodyHTML = '';
+    let localesConMasReservas = [];
+    let primerIngreso = 0;
+    
+    for (let i = 0; i < usuariosLocal.length; i++) {
+        let cantidadDeReservasHechasDelUsuario = calcularTotalDeReservasDeUnaPersonaEnUnLocal(usuariosLocal[i].id);
+        let totalDeReservasDelLocal = calcularTotalDeReservasEnUnLocal(usuariosLocal[i].id);
+
+
+        if (cantidadDeReservasHechasDelUsuario > 0) {
+            let porcentaje = 0;
+            if(totalDeReservasDelLocal > 0){
+                porcentaje = Math.round(cantidadDeReservasHechasDelUsuario * 100 / totalDeReservasDelLocal);
+            }
+            //solo si existe un elemento en el arreglo, entra a la condicion
+            if (localesConMasReservas.length > 0) {
+                if (calcularTotalDeReservasDeUnaPersonaEnUnLocal(localesConMasReservas[0]) == cantidadDeReservasHechasDelUsuario) {
+                    localesConMasReservas.push(usuariosLocal[i].id);
+                } else if(calcularTotalDeReservasDeUnaPersonaEnUnLocal(localesConMasReservas[0]) < cantidadDeReservasHechasDelUsuario){
+                    localesConMasReservas = [];
+                    localesConMasReservas.push(usuariosLocal[i].id);
+                }
+            } else if (primerIngreso == 0){ 
+                localesConMasReservas.push(usuariosLocal[i].id); 
+                primerIngreso++;}
+
+            
+            bodyHTML += `<li> ${usuariosLocal[i].nombre}  || ${cantidadDeReservasHechasDelUsuario} reservas hechas || Reservas totales del local : ${totalDeReservasDelLocal} || ${porcentaje}  % de resevas hechas por el usuario</li>`;
+
+
+        }
+
+
+    }
+
+document.querySelector("#ulListadoDeReservasCompletadas").innerHTML = bodyHTML;
+console.table(localesConMasReservas);
+
+}
+
+// -------------------------------------------------
+//             
 // -------------------------------------------------
 
 //  codigo de pruebas
@@ -1884,7 +2068,6 @@ function btnModificarCupoMaximoHandler() {
 // bucar reservas local
 function btnBuscarReservasEnLocalHandler() {
   let texto = document.querySelector("#buscadorDeReservas").value;
-
   if (texto != "") {
     console.log("buscar ", texto);
     completarTablaReservasPendientesLocalPorNombre(texto);
@@ -2044,24 +2227,7 @@ function buscarSubCadenaEnTexto(texto, subcadena) {
 
 // }
 
-// cupos disponibles
-function cuposDisponibles(pIdDeLocal) {
-  let cuposMaximo = 0;
-  let cuposUsados = 0;
-  for (let i = 0; i < usuariosLocal.length; i++) {
-    if (usuariosLocal[i].id == pIdDeLocal) {
-      cuposMaximo = usuariosLocal[i].cupoMaximo;
-    }
-  }
 
-  for (let i = 0; i < reservas.length; i++) {
-    if (reservas[i].localID == pIdDeLocal && reservas[i].estado == 1) {
-      cuposUsados += reservas[i].cupos;
-    }
-  }
-
-  return cuposMaximo - cuposUsados;
-}
 
 // console.log("cupos disponibles = "+cuposDisponibles(2));
 
@@ -2074,7 +2240,6 @@ function btnCancelarReservaHandler() {
 
   //busco la reserva a cancelar
   let reservaACancelar = buscarReservaPorID(idDeReservaACancelar);
-
   // aplico el metodo cancelar en la reserva obtenida
   reservaACancelar.cancelarReserva();
 
@@ -2107,7 +2272,6 @@ function buscarReservaPorID(id) {
 
 function completarTablaReservasSegunEstadoYUsuario(pEstado, pTipoUsuario) {
   let bodyHTML = "";
-
   for (let i = 0; i < reservas.length; i++) {
     // guardo la reserva de esta iteracion
     let reservaActual = reservas[i];
@@ -2221,6 +2385,7 @@ function completarTablaReservasSegunEstadoYUsuario(pEstado, pTipoUsuario) {
                                     
                                     </tr>
                                     `;
+
       }
 
       if (
@@ -2241,6 +2406,7 @@ function completarTablaReservasSegunEstadoYUsuario(pEstado, pTipoUsuario) {
                                                     reservaActual.usuarioID
                                                   ).nombre
                                                 }
+
                                             </td>
                                             <td>
                                                 ${reservaActual.cupos}
@@ -2252,6 +2418,7 @@ function completarTablaReservasSegunEstadoYUsuario(pEstado, pTipoUsuario) {
                                         </td>
                                         </tr>
                                         `;
+
       }
     }
   }
@@ -2358,6 +2525,7 @@ function btnFinalizarReservaHandler() {
 
   //busco la reserva a cancelar
   let reservaACancelar = buscarReservaPorID(idDeReservaACancelar);
+
 
   // aplico el metodo cancelar en la reserva obtenida
   reservaACancelar.finalizarReserva();

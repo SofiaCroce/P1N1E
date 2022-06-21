@@ -1116,11 +1116,11 @@ function btnMenuLoginHandler() {
   mostrarLogin();
   // usuario harcodeado
   // local
-  // document.querySelector('#txtLoginUsuario').value = "Usuario1"
-  // document.querySelector('#txtLoginPassword').value = "Paponita123"
+  document.querySelector('#txtLoginUsuario').value = "Usuario1"
+  document.querySelector('#txtLoginPassword').value = "Paponita123"
   //  persona
-  document.querySelector("#txtLoginUsuario").value = "Usuario8";
-  document.querySelector("#txtLoginPassword").value = "Juan1234";
+  // document.querySelector("#txtLoginUsuario").value = "Usuario8";
+  // document.querySelector("#txtLoginPassword").value = "Juan1234";
 }
 
 function btnMenuHomeHandler() {
@@ -1982,7 +1982,7 @@ function mostrarTotalDeReservasRealizadasEnElLocal() {
     document.querySelector("#divTotalesDeReservas").innerHTML =
         `<p>Total de reservas: ${reservasPendientes + cantidadReservasFinalizadas}</p>
         <p>Total de pendientes: ${reservasPendientes}</p>
-        <p>Total de finalizadas: ${cantidadReservasFinalizadas}</p>`;
+        <p>Total de finalizadas: ${cantidadReservasFinalizadas}</p>`; 
 
 }
 
@@ -2071,6 +2071,10 @@ function btnBuscarReservasEnLocalHandler() {
   if (texto != "") {
     console.log("buscar ", texto);
     completarTablaReservasPendientesLocalPorNombre(texto);
+  }else{
+
+    
+    btnAdministrarReservasLocalMenuHandler();
   }
 }
 
@@ -2133,11 +2137,23 @@ function completarTablaReservasPendientesLocalPorNombre(subCadena) {
                                         </tr>
                                         `;
     }
+
+
+  }
+
+
+  if(bodyHTML == ""){
+    bodyHTML += ` <tr>
+    <td COLSPAN="3">No hay coincidencias para esta búsqueda.
+    </td>
+</tr>
+                                  `;
   }
 
   document.querySelector("#bodyTablaReservasPendientesLocal").innerHTML =
     bodyHTML;
 
+    
   // guardo todos los botones generados en un arreglo
   let arrayDeBotones = document.querySelectorAll(".btnFinalizarReserva");
 

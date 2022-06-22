@@ -2058,7 +2058,29 @@ function mostrarListadoDeLocalesConReservasHechas() {
 
     }
 
-console.table(localesConMasReservas);
+
+    for (let i = 0; i < localesConMasReservas.length; i++) {
+      let localIdActual = localesConMasReservas[i];
+
+      
+      let localActual = buscarUsuarioPorID(usuariosLocal, localIdActual);
+      let cantidadDeReservasHechas = calcularTotalDeReservasDeUnaPersonaEnUnLocal(localIdActual);
+      if(localActual != null){
+        bodyHTMLLocalesConMasReservas += `<li>${localActual.nombre} || con ${cantidadDeReservasHechas} reservas hechas.</li>`;
+      }
+     
+      
+      
+    }
+
+    document.querySelector("#ulListadoDeReservasCompletadas").innerHTML = bodyHTML;
+
+    if(bodyHTMLLocalesConMasReservas == ""){
+      document.querySelector("#ulLocalConMasReservas").innerHTML = '<li>No hay reservas realizadas en locales.</li>'
+    }else{
+      document.querySelector("#ulLocalConMasReservas").innerHTML = bodyHTMLLocalesConMasReservas;
+    }
+
 
 }
 

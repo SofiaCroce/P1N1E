@@ -60,7 +60,7 @@ class UsuarioLocal {
     proximoUsuarioID++;
   }
 
-  dehabilitarLocal() {
+  deshabilitarLocal() {
     this.habilitado = false;
     console.log("Deshabilitado");
   }

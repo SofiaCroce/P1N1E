@@ -984,7 +984,7 @@ let reservaactualEsNuloOIndefinidaONaN = false
                                 // console.log('reservado');
 
                                 if (cuposDisponiblesActuales == reservaPrecargadaActual[2]) {
-                                    buscarLocalPorID(reservaPrecargadaActual[1]).dehabilitarLocal();
+                                    buscarLocalPorID(reservaPrecargadaActual[1]).deshabilitarLocal();
                                     mensaje +=
                                     "Se ha alcanzado el cupo maximo del local, el mismo se deshabilitara.(reserva)";
                                 }
@@ -1628,7 +1628,7 @@ function btnReservarEnLocalHandler() {
               mensaje = "Reserva realizada con exito.";
 
               if (cuposDisponiblesActuales == cuposParaReservarInt) {
-                buscarLocalPorID(dataInt).dehabilitarLocal();
+                buscarLocalPorID(dataInt).deshabilitarLocal();
                 mensaje +=
                   "Se ha alcanzado el cupo maximo del local, el mismo se deshabilitara.";
               }
@@ -1840,7 +1840,7 @@ function selectHabilitarDisponibilidadHandler() {
         console.log(usuarioLogueado);
       }
     } else if (valueDelSelect == "Deshabilitado") {
-      usuarioLogueado.dehabilitarLocal();
+      usuarioLogueado.deshabilitarLocal();
       document.querySelector("#pMensajeHabilitarLocal").innerHTML =
         "Local Deshabilitado, con " +
         cuposDisponibles(usuarioLogueado.id) +
@@ -1982,7 +1982,7 @@ function mostrarTotalDeReservasRealizadasEnElLocal() {
     document.querySelector("#divTotalesDeReservas").innerHTML =
         `<p>Total de reservas: ${reservasPendientes + cantidadReservasFinalizadas}</p>
         <p>Total de pendientes: ${reservasPendientes}</p>
-        <p>Total de finalizadas: ${cantidadReservasFinalizadas}</p>`; 
+        <p>Total de finalizadas: ${cantidadReservasFinalizadas}</p>`;
 
 }
 
@@ -2016,17 +2016,24 @@ function calcularTotalDeReservasDeUnaPersonaEnUnLocal(pIdUsuarioLocal) {
 
 function mostrarListadoDeLocalesConReservasHechas() {
     let bodyHTML = '';
+    let bodyHTMLLocalesConMasReservas = '';
+
     let localesConMasReservas = [];
     let primerIngreso = 0;
     
     for (let i = 0; i < usuariosLocal.length; i++) {
-        let cantidadDeReservasHechasDelUsuario = calcularTotalDeReservasDeUnaPersonaEnUnLocal(usuariosLocal[i].id);
-        let totalDeReservasDelLocal = calcularTotalDeReservasEnUnLocal(usuariosLocal[i].id);
+         let cantidadDeReservasHechasDelUsuario = calcularTotalDeReservasDeUnaPersonaEnUnLocal(usuariosLocal[i].id);
+         
+         let totalDeReservasDelLocal = calcularTotalDeReservasEnUnLocal(usuariosLocal[i].id);
 
 
-        if (cantidadDeReservasHechasDelUsuario > 0) {
+         if (cantidadDeReservasHechasDelUsuario > 0) {
+        
+
             let porcentaje = 0;
+
             if(totalDeReservasDelLocal > 0){
+        
                 porcentaje = Math.round(cantidadDeReservasHechasDelUsuario * 100 / totalDeReservasDelLocal);
             }
             //solo si existe un elemento en el arreglo, entra a la condicion
@@ -2039,7 +2046,8 @@ function mostrarListadoDeLocalesConReservasHechas() {
                 }
             } else if (primerIngreso == 0){ 
                 localesConMasReservas.push(usuariosLocal[i].id); 
-                primerIngreso++;}
+                primerIngreso++;
+              }
 
             
             bodyHTML += `<li> ${usuariosLocal[i].nombre}  || ${cantidadDeReservasHechasDelUsuario} reservas hechas || Reservas totales del local : ${totalDeReservasDelLocal} || ${porcentaje}  % de resevas hechas por el usuario</li>`;
@@ -2050,7 +2058,6 @@ function mostrarListadoDeLocalesConReservasHechas() {
 
     }
 
-document.querySelector("#ulListadoDeReservasCompletadas").innerHTML = bodyHTML;
 console.table(localesConMasReservas);
 
 }
@@ -2137,11 +2144,7 @@ function completarTablaReservasPendientesLocalPorNombre(subCadena) {
                                         </tr>
                                         `;
     }
-
-
   }
-
-
   if(bodyHTML == ""){
     bodyHTML += ` <tr>
     <td COLSPAN="3">No hay coincidencias para esta búsqueda.
@@ -2153,7 +2156,6 @@ function completarTablaReservasPendientesLocalPorNombre(subCadena) {
   document.querySelector("#bodyTablaReservasPendientesLocal").innerHTML =
     bodyHTML;
 
-    
   // guardo todos los botones generados en un arreglo
   let arrayDeBotones = document.querySelectorAll(".btnFinalizarReserva");
 

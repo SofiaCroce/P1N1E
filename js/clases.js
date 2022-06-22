@@ -42,7 +42,7 @@ class TipoEstadoDeReserva {
   }
 }
 // -------------------------------------------------
-// clase  UsuarioLocal
+// Clase  UsuarioLocal
 // -------------------------------------------------
 class UsuarioLocal {
   constructor(pNombreUsuario, pPassword, pNombre, pDireccion, pCupoMaximo, pFoto, pTipoLocal) {

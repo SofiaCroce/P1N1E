@@ -1,5 +1,5 @@
 // -------------------------------------------------
-//                variables autonumericas
+//                variables autonuméricas
 // -------------------------------------------------
 let proximoIdTipoUsuario = 1;
 let proximoIdTipoLocal = 1;
@@ -62,12 +62,12 @@ class UsuarioLocal {
 
   deshabilitarLocal() {
     this.habilitado = false;
-    console.log("Deshabilitado");
+    
   }
 
   habilitarLocal(){
     this.habilitado = true;
-    console.log("Habilitado");
+   
   }
 
   modificarCupoMaximo(nuevoCupoMaximo){

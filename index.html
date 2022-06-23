@@ -5,87 +5,113 @@
   <link rel="icon" href="data:,">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ejercicio integrador</title>
+  <title>OBLIGATORIO P1</title>
   <link rel="stylesheet" href="css/estilos.css">
 </head>
 
 <body>
-  <div id="contenedor">
-    <div id="cabezal" class="clearfix">
-      <img id="logo" src="https://develotion.com/p1/2022_03/icon.png" alt="logo">
 
-      <ul id="navPrincipal">
+<!-- ----------------------------- -->
+<!-- CABEZAL -->
+<!-- ----------------------------- -->
+<header id="cabezal">
+<!-- LOGO -->
+<!-- ------------------------------------------------------- -->
+  <figure>
+    <img id="logo" width="150px" src="./img/logo.jpg" alt="logo">
+  </figure>
+  
+  <h1 id="titulo">OBLIGATORIO P1</h1>
+<!-- MENU PRINCIPAL -->
+<!-- ------------------------------------------------------- -->
+  <nav>
+    <ul id="navPrincipal">
 
-        <li id="btnMenuHome">
-          <a>Home</a>
-        </li>
+      <li id="btnMenuHome">
+        <a>Home</a>
+      </li>
 
-        <li id="btnMenuLogin">
-          <a>Ingresar</a>
-        </li>
-        <li id="btnMenuRegistro">
-          <a>Registro</a>
-        </li>
-        
-        <!-- <li id="btnMenuListaUsuarios">
-          <a>Gestión de usuarios</a>
-        </li>
-        <li id="btnMenuAltaPublicacion">
-          <a>Publicar</a>
-        </li> -->
-        <li id="btnMenuCerrarSesion">
-          <a>Salir</a>
-        </li>
-      </ul>
-      <!--<div id="aux">
-        <a>Menú alt. 1</a> | <a>Menú alt. 2</a>
-      </div>-->
-      <!-- FIN AUX -->
-    </div><!-- FIN CABEZAL -->
+      <li id="btnMenuLogin">
+        <a>Ingresar</a>
+      </li>
+      <li id="btnMenuRegistro">
+        <a>Registro</a>
+      </li>
+      <li id="btnMenuCerrarSesion">
+        <a>Salir</a>
+      </li>
+  </nav>
 
+</header>
 
-    <div id="cabezalPersona" class="clearfix">
+<!-- ----------------------------- -->
+<!-- CONTENIDO PRINCIPAL -->
+<!-- ----------------------------- -->
 
-      <ul id="navSecundarioPersona">
-        
-        <li id="btnReservasPendientesPersonaMenu">
-          <a>Reservas Pendientes</a>
-        </li>
-        <li id="btnReservasFinalizadasPersonaMenu">
-          <a>Reservas Finalizadas</a>
-        </li>
-        <li id="btnReservarPersonaMenu">
-          <a>Reservar</a>
-        </li>
-        <li id="btnEstadisticasPersonaMenu">
-          <a>Estadísticas</a>
-        </li>
-       
-      </ul>
+<main>
+
+  <!-- MENU USUARIOS  -->
+
+<section id="menuUsuarios">
+    <!-- PERSONA -->
+      <!-- ------------------------------------------------------- -->
+
+  
+  <div id="cabezalPersona" >
+
+    <ul id="navSecundarioPersona">
       
-    </div>
+      <li id="btnReservasPendientesPersonaMenu">
+        <a>Reservas Pendientes</a>
+      </li>
+      <li id="btnReservasFinalizadasPersonaMenu">
+        <a>Reservas Finalizadas</a>
+      </li>
+      <li id="btnReservarPersonaMenu">
+        <a>Reservar</a>
+      </li>
+      <li id="btnEstadisticasPersonaMenu">
+        <a>Estadísticas</a>
+      </li>
+    </ul>
+  </div>
 
-    <div id="cabezalLocal" class="clearfix">
+  <!-- LOCAL -->
+    <!-- ------------------------------------------------------- -->
+  <div id="cabezalLocal" >
 
-      <ul id="navSecundarioLocal">
-        
-        
-        <li id="btnAdministrarReservasLocalMenu">
-          <a>Administrar Reservas</a>
-        </li>
-        <li id="btnEstadisticasLocalMenu">
-          <a>Estadisticas</a>
-        </li>
-        <li id="btnAdministrarLocalMenu">
-          <a>Administrar</a>
-        </li>
-      </ul>
+    <ul id="navSecundarioLocal">
       
-    </div>
+      <li id="btnAdministrarReservasLocalMenu">
+        <a>Administrar Reservas</a>
+      </li>
+      <li id="btnEstadisticasLocalMenu">
+        <a>Estadísticas</a>
+      </li>
+      <li id="btnAdministrarLocalMenu">
+        <a>Administrar</a>
+      </li>
+    </ul>
+    
+  </div>
+  
+</section>
+<!-- FIN MENU USUARIOS -->
+    
 
-    <div id="contenido">
+<!-- CONTENIDO Y PANTALLAS -->
+<section id="contenido">
 
-      <div id="divLogin">
+  <!-- HOME -->
+  <!-- ------------------------------------------------------- -->
+      <div id="divHome">
+        <h3>Home</h3>
+        <h1>Bienvenido</h1>
+      </div>
+
+  <!-- LOGIN -->
+  <!-- ------------------------------------------------------- -->
+      <div id="divLogin" class="fondoBlureado">
         <h3>Ingreso</h3>
         <label for="txtLoginUsuario">Usuario:</label>
         <input id="txtLoginUsuario" type="text">
@@ -98,7 +124,9 @@
         <div id="divLoginMensajes"></div>
       </div>
 
-      <div id="divRegistro">
+<!-- REGISTRO -->
+    <!-- ------------------------------------------------------- -->
+      <div id="divRegistro" class="fondoBlureado">
         <h3>Registro</h3>
         <label for="txtRegistroUsuario">Usuario:</label>
         <input id="txtRegistroUsuario" type="text">
@@ -106,33 +134,44 @@
         <label for="txtRegistroPassword">Password:</label>
         <input id="txtRegistroPassword" type="password">
         <br><br>
+        <label for="txtRegistroNombre">Nombre:</label>
+        <input id="txtRegistroNombre" type="text">
+        <br><br>
         <input type="button" value="Registrarse" id="btnRegistrarse">
         <br><br>
         <div id="divRegistroMensajes"></div>
       </div>
 
-      <div id="divHome">
-        <h3>Home</h3>
-        <h1>Bienvenido</h1>
-      </div>
+  <!-- ------------------------------------------------------- --> 
+<!-- PANTALLAS PERSONA -->
+ <!-- ------------------------------------------------------- -->
+ 
+ 
        <!-- Realizar Reserva en Local -->
     <!-- ------------------------------------------------------- -->
 
-    <div id="realizarReserva">
-      <label for="localAReservar">Local:</label>
-      <select name="localAReservar" id="localAReservar">
-          <option selected value="1">Local 1</option>
-          <option value="2">Local 2</option>
-      </select>
-      <br>
-      <br>
-      <label for="cantidadAReservar">Cupos a reservar:</label>
-      <input type="number" id="cantidadAReservar">
-  <br>
-  <br>
-  <input type="button" id="btnRealizarReserva" value="Reservar">
-  <hr>
+
+    <div id="realizarReserva" class="fondoBlureado estiloTabla">
+
+      <table>
+        <thead>
+          <tr>
+            <th>Foto</th>
+            <th>Local</th>
+            <th>Tipo de local</th>
+            <th>Disponibilidad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="bodyTablaReservar">
+        </tbody>
+      </table>
+
   </div>
+
+  <div id="verDatosLocalAReservar" class="fondoBlureado">
+    
+    </div>
 
     
 <!-- ESTADISTICAS -->
@@ -140,37 +179,38 @@
 
   <div id="infoEstadistica">
     <!-- INFORMACION DE LOCAL -->
-    
-            <div id="infoEstadisticaLocal">
+  <!-- ------------------------------------------------------- -->
+            <div id="infoEstadisticaLocal"  class="fondoBlureado estiloEstadisticas">
                 <h3>Local</h3>
-                <p id="pPorcentajeDeOcpacion">Ocupación 20%</p>
+
+                <p id="pPorcentajeDeOcpacion">
+
+                </p>
     
-                <p id="pPromedioDeCalificacion">Calificación del local : 4.9</p>
+                <p id="pPromedioDeCalificacion">
+
+                </p>
     
-                <h4>Listado de calificaciones por local.</h4>
+                <h4>Listado de calificaciones por local:</h4>
+
                 <ul id="ulListadoDeCalificaciones">
-                    <li>local 1: 4.3</li>
-                    <li>local 2: 3.3</li>
-                    <li>local 3: 4.0</li>
-                    <li>local 4: 4.5</li>
+                  
                 </ul>
-            <h4>Reservas.</h4>
-                <p id="pTotalDeReservas">Total de reservas: 52</p>
-                <p id="pTotalDeReservasPendientes">Total de pendientes: 22</p>
-                <p id="pTotalDeReservasFinalizadas">Total de finalizadas: 30</p>
-            </div> 
+
+                <h4>Reservas:</h4>
+
+                <div id="divTotalesDeReservas"></div>                
+                </div> 
                 
     <!-- INFORMACION PERSONA -->
-    
-                <div id="infoEstadisticaPersona">
+   <!-- ------------------------------------------------------- --> 
+                <div id="infoEstadisticaPersona" class="fondoBlureado estiloEstadisticas">
                     <h3>Persona</h3>
                     <h4>Listado de locales con reservas completadas.</h4>
                     <ul id="ulListadoDeReservasCompletadas">
-                        <li>local 1  \ 15 reservas hechas \ Reservas taltales del local : 50 \ 7.5  % de resevas hechas por el usuario</li>
-                        <li>local 2: \ 2  reservas hechas \ Reservas taltales del local : 33 \ 6.6  % de resevas hechas por el usuario</li>
-                        <li>local 4: \ 9  reservas hechas \ Reservas taltales del local : 42 \ 37.8 % de resevas hechas por el usuario</li>
+                       
                     </ul>
-                <h4>Local con mas reservas hechas.</h4>
+                <h4>Local con más reservas hechas.</h4>
     
                 <ul id="ulLocalConMasReservas">
                     <li>local 1  \ 15 reservas hechas</li>
@@ -184,10 +224,8 @@
       </div>
               <!-- Reservas Pendientes -->
     <!-- ------------------------------------------------------- -->
-<div id="reservasPendientes">
-
-
-
+<div id="reservasPendientes" class="fondoBlureado estiloTabla">
+  <!-- fondoBlureado -->
   <table>
     <thead>
       <tr>
@@ -201,83 +239,79 @@
     </tbody>
   </table>
 
-  <!-- <ul>
-    <li>
-      <img id="logo" src="https://develotion.com/p1/2022_03/icon.png" alt="logo">
-local 1 / 10 cupos  <a href="#">Ver</a>
-    </li>
-    <li>
-      <img id="logo" src="https://develotion.com/p1/2022_03/icon.png" alt="logo">
-local 2 / 3 cupos  <a href="#">Ver</a>
-    </li>
-    <li>
-      <img id="logo" src="https://develotion.com/p1/2022_03/icon.png" alt="logo">
-local 3 / 25 cupos  <a href="#">Ver</a>
-    </li>
-    <li>
-      <img id="logo" src="https://develotion.com/p1/2022_03/icon.png" alt="logo">
-local 4 / 7 cupos  <a href="#">Ver</a>
-    </li>
-   
-  </ul> -->
+
 </div>
 
-<!-- ------------------------------------------------------- -->
-
       <!-- calificar RESERVA FINALIZADA -->
-    <!-- ------------------------------------------------------- -->
-    <div id="reservasFinalizadas">
+  <!-- ------------------------------------------------------- -->
+    <div id="reservasFinalizadas" class="fondoBlureado estiloTabla" >
     
     <br>
-    <fieldset>
-      <legend>Puntua tu reserva</legend>
-      <label>
-          <input type="radio" name="numero" value="1"> 1
-      </label>
-      <label>
-          <input type="radio" name="numero" value="2"> 2
-      </label>
-      <label>
-          <input type="radio" name="numero" value="3"> 3
-      </label>
-      <label>
-          <input type="radio" name="numero" value="4"> 4
-      </label>
-      <label>
-          <input type="radio" name="numero" value="5"> 5
-      </label>
-    <br>
-    <br>
-      <input type="button" id="btnPuntuar" value="Puntuar">
-    </fieldset>
-    
-    <hr>
+    <table>
+      <thead>
+        <tr>
+          <th>Foto</th>
+          <th>Local</th>
+          <th>Cupos</th>
+          <th>Puntuación</th>
+          <th>Acciones</th>
+          
+        </tr>
+      </thead>
+      <tbody id="bodyTablaPuntuarReservasFinalizadas">
+      </tbody>
+    </table>
+
+
     </div>
 
+ <!-- ------------------------------------------------------- --> 
+<!-- PANTALLAS LOCAL -->
+ <!-- ------------------------------------------------------- -->
+
+
+
+
     <!-- ADMINISTRAR LOCAL -->
-    <!-- ------------------------------------------------------- -->
-    <div id="administrarLocal">
-      <label for="habilitarDisponibilidad">Habilitar disponibilidad:</label>
-      <br>
-      <br>
-      <select name="habilitarDisponibilidad" id="habilitarDisponibilidad">
-          <option selected value="Habilitado">Habilitado</option>
-          <option value="Deshabilitado">Deshabilitado</option>
-      </select>
-      <hr>
-      <label for="txtCupoMaximo">Modificar cupo maximo:</label>
-      <br>
-      <br>
-        <input id="txtCupoMaximo" type="number">
-  <hr>
-  </div>
+     <!-- ------------------------------------------------------- -->
+    
+        <div id="administrarLocal" class="fondoBlureado">
+          <hr>
+          <label for="habilitarDisponibilidad">Habilitar disponibilidad:</label>
+          <br>
+          <br>
+          <select name="habilitarDisponibilidad" id="habilitarDisponibilidad">
+              <!-- <option selected value="Habilitado">Habilitado</option>
+              <option value="Deshabilitado">Deshabilitado</option> -->
+          </select>
+
+          <p id="pMensajeHabilitarLocal"></p>
+
+          <hr>
+          <label for="txtCupoMaximo">Modificar cupo máximo:</label>
+          <br>
+          <br>
+            <input id="txtCupoMaximo" type="number">
+            <input type="button" value="Modificar" id="btnModificarCupoMaximo">
+            <p id="pMensajeModificarCupoMaximo"></p>
+            <hr>
+      </div>
+    
    
          <!-- CAMBIAR ESTADO DE RESERVA -->
     <!-- ------------------------------------------------------- -->
 
-<div id="adminReserva">
+<div id="adminReserva" class="fondoBlureado estiloTabla">
 
+  <div id="buscadorReservasPendientesLocal">
+    <label for="buscadorDeReservas">Buscar una Reserva:</label>
+    <input type="text" id="buscadorDeReservas" placeholder=" Nombre Cliente...">
+    <input type="button" value="Buscar" id="btnBuscarReservasEnLocal">
+    <br>
+    <br>
+  </div>
   
+
   <table>
     <thead>
       <tr>
@@ -289,47 +323,25 @@ local 4 / 7 cupos  <a href="#">Ver</a>
     <tbody id="bodyTablaReservasPendientesLocal">
     </tbody>
   </table>
-<!--   
-  <label for="buscadorDeReservas">Buscar una Reserva:</label>
-  <input type="text" id="buscadorDeReservas" placeholder="Ingrese palabra clave...">
-  <input type="button" value="Buscar" id="btnBuscarReservas">
-  <br>
-  <br>
-  <h3>Lista de Reservas Pendientes:</h3>
-  <ul>
-      <li>Reserva Asiento 1 Fila 8
-      <div id="reservaPendiente01">
-          <label for="estadoReserva01">Estado de la Reserva:</label>
-          <select id="estadoReserva01">
-              <option selected value="pendiente">Pendiente</option>
-              <option value="finalizado">Finalizado</option>
-          </select>
-      </div>
-      </li>
-      <li>Reserva Asiento 2 Fila 8
-      <div id="reservaPendiente02">
-          <label for="estadoReserva02">Estado de la Reserva:</label>
-          <select id="estadoReserva02">
-              <option selected value="pendiente">Pendiente</option>
-              <option value="finalizado">Finalizado</option>
-          </select>
-      </div>
-      </li>
-  </ul>
-  <button id="btnGuardarCambiosReservas">Guardar Cambios</button>
-  <hr> -->
 
-  
-</div>
-    </div><!-- FIN CONTENIDO -->
+  </div>
+</section>
 
-    <div id="pie">
-      <a href="https://www.ort.edu.uy">Ejemplo realizado en clase</a>
-    </div><!-- FIN PIE -->
-  </div><!-- FIN CONTENEDOR -->
+</main>
+<!-- FIN DEL CONTENIDO PRINCIPAL -->
 
+
+<!-- PIE DE PANTALLA -->
+<div id="pie">
+
+</div><!-- FIN PIE -->
+
+
+
+<!-- scripts -->
   <script type="text/javascript" src="js/clases.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
+ 
 </body>
 
 </html>
